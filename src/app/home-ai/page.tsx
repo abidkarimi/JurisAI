@@ -105,17 +105,20 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         {/* ---- */}
         <div className=" border-b border-neutral-200 dark:border-neutral-700 " style={{ borderColor: '#4d4d4f' }}></div>
         <div className="p-20"></div>
+        <div className="p-20"></div>
         <div className="p-10"></div>
         <div className="p-10"></div>
         <div className="p-10"></div>
+        <div className="p-1.5"></div>
+
 
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
 
-        <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
+        <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col w-100%">
             <div className="col-span-2 flex items-center md:col-span-3">
-              <LeftPanelFooter className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start" />
+              <LeftPanelFooter className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start w-80 pl-4" />
             </div>
           </div>
         {/* ---- */}
@@ -228,7 +231,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           <Input
             fontClass=""
             sizeClass="h-16 px-4 py-3"
-            rounded="rounded-3xl"
+            rounded="rounded-2xl"
             placeholder="Message JurisAI"
           />
           <ButtonCircle
@@ -264,7 +267,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             </h6>
               <div
                 key={item.id}
-                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800  mb-10"
+                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800  mb-10 w-60 h-16 "
               >
                 <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400">
                   {item.subHeading}
