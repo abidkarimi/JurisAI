@@ -33,11 +33,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.className}>
       <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
-        {/* <ClientCommons /> */}
-        {/* <SiteHeader /> */}
+        {/* {<ClientCommons /> } */}
+        {/* {<SiteHeader />} */}
         {children}
-        {/* <FooterNav /> */}
-        {/* <Footer /> */}
+        {/* {<FooterNav />} */}
+        {/* {<Footer />} */}
       </body>
     </html>
   );
