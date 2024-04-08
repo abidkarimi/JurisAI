@@ -107,6 +107,7 @@ import Logo from "@/shared/Logo";
 import axios from "axios";
 import router from "next/router";
 import { stringify } from "querystring";
+import { useRouter } from "next/navigation";
 // import { toast } from "react-hot-toast";
 
 interface RegisterAIProps {
@@ -114,6 +115,7 @@ interface RegisterAIProps {
 }
 
 const RegisterAI: FC<RegisterAIProps> = ({ className = "" }) => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -130,7 +132,7 @@ const RegisterAI: FC<RegisterAIProps> = ({ className = "" }) => {
     try {
       const response = await axios.post("/api/users/signup", formData);
       console.log("Signup success", response.data);
-      router.push("/login");
+      router.push("/login-ai");
       // Redirect to login page after successful signup
       // toast.success("Signup successful");
     } catch (error: any) {
