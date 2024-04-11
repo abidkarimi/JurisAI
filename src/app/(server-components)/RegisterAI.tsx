@@ -108,7 +108,7 @@ import axios from "axios";
 import router from "next/router";
 import { stringify } from "querystring";
 import { useRouter } from "next/navigation";
-// import { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 interface RegisterAIProps {
   className?: string;
@@ -132,9 +132,10 @@ const RegisterAI: FC<RegisterAIProps> = ({ className = "" }) => {
     try {
       const response = await axios.post("/api/users/signup", formData);
       console.log("Signup success", response.data);
+      
       router.push("/login-ai");
       // Redirect to login page after successful signup
-      // toast.success("Signup successful");
+      toast.success("Signup successful");
     } catch (error: any) {
       console.error("Signup failed", error.message, stringify(error));
       // router.push("/login")
@@ -239,7 +240,7 @@ const RegisterAI: FC<RegisterAIProps> = ({ className = "" }) => {
             </span>
             <Link
               href="/login-ai"
-              className="ml-1 text-sm underline font-medium"
+              className="ml-1 text-sm underline font-medium "
             >
               Log In
             </Link>

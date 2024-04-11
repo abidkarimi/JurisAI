@@ -35,6 +35,7 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
       router.push("/home-ai");
     } catch (error: any) {
       console.log("Login failed", error.message);
+      console.log("invalid creadentials");
       toast.error(error.message);
     } finally {
       setLoading(false);
