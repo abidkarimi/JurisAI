@@ -27,6 +27,7 @@ import Link from "next/link";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import router from "next/router";
+import PageSubcription from "./home-ai-components/home-ai-subscription";
 
 export interface AuthorPageProps {
   className?: string;
@@ -72,10 +73,9 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       console.error(error.message);
       toast.error("Failed to logout");
     }
-  }
+  };
 
   const renderSidebar = () => {
-    
     return (
       <div className=" w-full flex flex-col space-y-6 sm:space-y-3 px-0 sm:pl-0 xl:pl-0  ">
         {/* <Avatar
@@ -146,7 +146,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
         <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
           <div className="col-span-2 flex items-center md:col-span-3">
-            <LeftPanelFooter onLogout={handleLogout}/>
+            <LeftPanelFooter onLogout={handleLogout} />
           </div>
         </div>
         {/* ---- */}

@@ -27,17 +27,6 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({
     document.documentElement.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);
 
-  const handleLogout = async () => {
-    try {
-      await axios.get("/api/users/logout");
-      toast.success("Logout successful");
-      window.location.href = "/login-ai"; // Redirect after logout
-    } catch (error: any) {
-      console.error(error.message);
-      toast.error("Failed to logout");
-    }
-  };
-
   return (
     <div className={`nc-SocialsList1 ${className}`} data-nc-id="SocialsList1">
       {socials.map((item, index) => {
