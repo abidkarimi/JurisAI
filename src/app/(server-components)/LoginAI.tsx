@@ -22,7 +22,7 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
   });
 
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
-  const [showSubscriptionPopup, setShowSubscriptionPopup] = useState(false);
+
   const [loading, setLoading] = React.useState(false);
   const [loginError, setLoginError] = useState("");
 
@@ -34,9 +34,6 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
       const response = await axios.post("/api/users/login", user);
       console.log("Login success", response.data);
       toast.success("Login successful");
-
-      // Redirect to profile page on client-side
-      setShowSubscriptionPopup(true);
       router.push("/home-ai");
     } catch (error: any) {
       console.log("Login failed", error.message);
@@ -55,13 +52,7 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
       setButtonDisabled(true);
     }
   }, [user]);
-  const handleSubscriptionPopup = () => {
-    return (
-      <div>
-        <PageSubscription />
-      </div>
-    );
-  };
+
 
   return (
     <div
