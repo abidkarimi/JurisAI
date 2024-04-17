@@ -36,7 +36,7 @@ const LoginAI: FC<SectionHero2ArchivePageProps> = ({
           <form className="grid grid-cols-1 gap-6 pt-6 pb-20" action="#" method="post">
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
-                Email LAI
+                Email
               </span>
               <Input
                 type="email"

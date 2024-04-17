@@ -46,7 +46,7 @@ const FOUNDER_DEMO: Statistic[] = [
   {
     id: "2",
     heading: "Capabilities",
-    subHeading: "Remembers what user said earlier in the conversation",
+    subHeading: "Remembers what user said earlier in   the conversation",
     text: "Allows user to provide follow-up correction",
     text1: "99.8% Accuracy"
   },
@@ -64,7 +64,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   const renderSidebar = () => {
     return (
-      <div className=" w-full flex flex-col space-y-6 sm:space-y-3 px-0 sm:pl-0 xl:pl-0  ">
+      <div className=" w-full flex flex-col space-y-6 sm:space-y-3 px-0 sm:pl-0 xl:pl-0 h-screen">
         {/* <Avatar
           hasChecked
           hasCheckedClass="w-6 h-6 -top-0.5 right-2"
@@ -104,20 +104,18 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
         {/* ---- */}
         <div className=" border-b border-neutral-200 dark:border-neutral-700 " style={{ borderColor: '#4d4d4f' }}></div>
-        <div className="p-20"></div>
-        <div className="p-20"></div>
+        {/* <div className="p-20"></div>
         <div className="p-10"></div>
-        <div className="p-10"></div>
-        <div className="p-10"></div>
-        <div className="p-1.5"></div>
+        <div className="p-10"></div> */}
+        <div className="h-96"></div>
 
+{/* 
+        <div className="border-b border-neutral-200 dark:border-neutral-700 w-50 pt-20" style={{ borderColor: '#4d4d4f' }}></div>
+        <div className="border-b border-neutral-200 dark:border-neutral-700 w-50 pt-20" style={{ borderColor: '#4d4d4f' }}></div> */}
 
-        <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
-        <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
-        <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
-
-        <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col w-100%">
-            <div className="col-span-2 flex items-center md:col-span-3">
+        <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col w-100% pt-20">
+        <div className="border-b border-neutral-200 dark:border-neutral-700 w-50 pt-6" style={{ borderColor: '#4d4d4f' }}></div>
+            <div className="col-span-2 flex items-center md:col-span-3 pt-40">
               <LeftPanelFooter className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start w-80 pl-4" />
             </div>
           </div>
@@ -267,7 +265,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             </h6>
               <div
                 key={item.id}
-                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800  mb-10 w-60 h-16 "
+                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800  mb-10"
               >
                 <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400">
                   {item.subHeading}
