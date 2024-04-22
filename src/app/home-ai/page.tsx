@@ -126,10 +126,10 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           className=" border-b border-neutral-200 dark:border-neutral-700 "
           style={{ borderColor: "#4d4d4f" }}
         ></div>
-        <div className="p-20"></div>
-        <div className="p-10"></div>
-        <div className="p-10"></div>
-        <div className="p-10"></div>
+        <div className="p-11"></div>
+        <div className="p-11"></div>
+        <div className="p-11"></div>
+        <div className="p-11"></div>
 
         <div
           className="border-b border-neutral-200 dark:border-neutral-700 w-50"

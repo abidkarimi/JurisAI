@@ -173,7 +173,7 @@ const RegisterAI: FC<RegisterAIProps> = ({ className = "" }) => {
 
   return (
     <div
-      className={`nc-SectionHero2ArchivePage relative ${className} pt-2 sm:pt-10`}
+      className={`nc-SectionHero2ArchivePage relative ${className} pt-1 sm:pt-10`}
       data-nc-id="SectionHero2ArchivePage"
     >
       <div
@@ -187,7 +187,7 @@ const RegisterAI: FC<RegisterAIProps> = ({ className = "" }) => {
           <Logo />
         </div>
         <div className="max-w-md mx-auto p-3 sm:p-6">
-          <form onSubmit={handleSubmit} className="space-y-3">
+          <form onSubmit={handleSubmit} className="space-y-2">
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
                 Full name
