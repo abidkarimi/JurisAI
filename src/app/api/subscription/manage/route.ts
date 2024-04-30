@@ -25,10 +25,11 @@ export async function POST(request: NextRequest) {
         } else {
             user.subscriptionType = newSubscriptionType;
             user.subscriptionStartDate = new Date();
-            if (newSubscriptionType === "trial") {
+            if (newSubscriptionType === "free") {
                 user.subscriptionEndDate = new Date();
                 user.subscriptionEndDate.setDate(user.subscriptionEndDate.getDate() + 3); // Three days trial
             } else if (newSubscriptionType === "monthly") {
+                user.subscriptionType = "monthly";
                 user.subscriptionEndDate = new Date();
                 user.subscriptionEndDate.setMonth(user.subscriptionEndDate.getMonth() + 1); // One month subscription
             }
@@ -39,7 +40,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
             message: "Subscription updated successfully",
             success: true,
-            user
+            // user
         });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });

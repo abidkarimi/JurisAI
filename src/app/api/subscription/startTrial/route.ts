@@ -13,17 +13,17 @@ export async function POST(request: NextRequest) {
         }
 
         // Start the trial
-        user.subscriptionType = "trial";
+        user.subscriptionType = "free";
         user.subscriptionStartDate = new Date();
         user.subscriptionEndDate = new Date();
         user.subscriptionEndDate.setDate(user.subscriptionEndDate.getDate() + 3); // Three days trial
-        
+
         await user.save();
 
         return NextResponse.json({
             message: "Trial started successfully",
             success: true,
-            user
+            // user
         });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
