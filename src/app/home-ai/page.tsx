@@ -37,28 +37,29 @@ export interface Statistic {
 const FOUNDER_DEMO: Statistic[] = [
   {
     id: "1",
-    heading: "Examples",
+    heading: "🔍 Examples",
     subHeading:
       "Can you tell me the three-stage test in Denton",
-    text:"What are the consequences of Part 36",
-    text1: "“How do I enforce a Judgment out of Jurisdiction”"
+    text: "What are the consequences of Part 36",
+    text1: "How do I enforce a Judgment out of Jurisdiction"
   },
   {
     id: "2",
-    heading: "Capabilities",
-    subHeading: "Remembers what user said earlier in   the conversation",
+    heading: "💡 Capabilities",
+    subHeading: "Remembers what user said earlier in the conversation",
     text: "Allows user to provide follow-up correction",
     text1: "99.8% Accuracy"
   },
   {
     id: "3",
-    heading: "Limitations",
+    heading: "⚠️ Limitations",
     subHeading:
       "May rarely generate incorrect information ",
     text: "May occasionally produce harmful instructions or biased",
     text1: "Limited knowledge of events after February 2024"
   },
 ];
+
 const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
 
