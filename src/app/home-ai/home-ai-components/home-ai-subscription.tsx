@@ -17,38 +17,44 @@ export interface PricingItem {
 const pricings: PricingItem[] = [
   {
     isPopular: false,
-    name: "Starter",
-    pricing: "$5",
+    name: "Free",
+    pricing: "€0 ",
     per: "/mo",
+    desc: ` “Welcome to JurisAI! Please note that we currently offer one three-day free trial per law firm. After the trial period ends, access to JurisAI will require a paid subscription. Thank you for choosing JurisAI”`,
     features: ["Automated Reporting", "Faster Processing", "Customizations"],
-    desc: ` Literally you probably haven't heard of them jean shorts.`,
-  },
-  {
-    isPopular: true,
-    name: "Basic",
-    pricing: "$15",
-    per: "/mo",
-    features: [
-      "Everything in Starter",
-      "100 Builds",
-      "Progress Reports",
-      "Premium Support",
-    ],
-    desc: ` Literally you probably haven't heard of them jean shorts.`,
   },
   {
     isPopular: false,
-    name: "Plus",
-    pricing: "$25",
+    name: "Basic",
+    pricing: "€200",
     per: "/mo",
     features: [
-      "Everything in Basic",
-      "Unlimited Builds",
-      "Advanced Analytics",
-      "Company Evaluations",
+      "Exclusive features and updates.",
+      "Priority customer support.",
+      "Regular newsletters and insights.",
+      "No Contact – Cancel Anytime.",
+
     ],
-    desc: ` Literally you probably haven't heard of them jean shorts.`,
+    desc: ` “We are looking to introduce further subscription plans in the near future. However, currently, this service has been specifically designed for the use of law firms specialising in the civil litigation area of law. 
+    
+
+    
+    Subscribe today to unlock a world of possibilities and elevate your experience with
+    ”`,
   },
+  // {
+  //   isPopular: false,
+  //   name: "Plus",
+  //   pricing: "$25",
+  //   per: "/mo",
+  //   features: [
+  //     "Everything in Basic",
+  //     "Unlimited Builds",
+  //     "Advanced Analytics",
+  //     "Company Evaluations",
+  //   ],
+  //   desc: ` Literally you probably haven't heard of them jean shorts.`,
+  // },
 ];
 
 const PageSubcription: FC<PageSubcriptionProps> = () => {
@@ -56,7 +62,7 @@ const PageSubcription: FC<PageSubcriptionProps> = () => {
     return (
       <div
         key={index}
-        className={`h-full relative px-6 py-8 rounded-3xl border-2 flex flex-col overflow-hidden ${
+        className={`h-full  bg-white dark:bg-[#0c1222] relative px-6 py-8 rounded-3xl border-2 flex flex-col overflow-hidden ${
           pricing.isPopular
             ? "border-primary-500"
             : "border-neutral-100 dark:border-neutral-700"
@@ -73,14 +79,14 @@ const PageSubcription: FC<PageSubcriptionProps> = () => {
           </h3>
           <h2 className="text-5xl leading-none flex items-center text-neutral-900 dark:text-neutral-300">
             <span>{pricing.pricing}</span>
-            <span className="text-lg ml-1 font-normal text-neutral-500">
+            <span className="text-lg ml-1 font-normal text-neutral-500 dark:text-neutral-300 dark:hover:text-white">
               {pricing.per}
             </span>
           </h2>
         </div>
         <nav className="space-y-4 mb-8">
           {pricing.features.map((item, index) => (
-            <li className="flex items-center" key={index}>
+            <li className="flex items-center dark:text-neutral-300 dark:hover:text-white" key={index}>
               <span className="mr-4 inline-flex flex-shrink-0 text-primary-6000">
                 <CheckIcon className="w-5 h-5" aria-hidden="true" />
               </span>
@@ -91,34 +97,27 @@ const PageSubcription: FC<PageSubcriptionProps> = () => {
           ))}
         </nav>
         <div className="flex flex-col mt-auto">
-          {pricing.isPopular ? (
-            <ButtonPrimary>Submit</ButtonPrimary>
-          ) : (
-            <ButtonSecondary>
-              <span className="font-medium">Submit</span>
-            </ButtonSecondary>
-          )}
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-3">
+        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-3">
             {pricing.desc}
           </p>
+          {pricing.isPopular ? (
+            <ButtonPrimary>3 Days Trail</ButtonPrimary>
+          ) : (
+            <ButtonSecondary>
+              <span className="font-medium dark:text-neutral-300 dark:hover:text-white">Buy Now</span>
+            </ButtonSecondary>
+          )}
+         
         </div>
       </div>
     );
   };
 
   return (
-    <div className={`nc-PageSubcription container pb-24 lg:pb-32 `}>
-      <header className="text-center max-w-2xl mx-auto my-20">
-        <h2 className="flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
-          <span className="mr-4 text-3xl md:text-4xl leading-none">💎</span>
-          Subscription
-        </h2>
-        <span className="block text-sm mt-2 text-neutral-700 sm:text-base dark:text-neutral-200">
-          Pricing to fit the needs of any companie size.
-        </span>
-      </header>
+    <div className={`nc-PageSubcription container pb-24 lg:pb-32 bg-transparent `}>
+      
       <section className="text-neutral-600 text-sm md:text-base overflow-hidden">
-        <div className="grid lg:grid-cols-3 gap-5 xl:gap-8">
+        <div className="grid lg:grid-cols-2 gap-5 xl:gap-8 ">
           {pricings.map(renderPricingItem)}
         </div>
       </section>
