@@ -44,13 +44,13 @@ const FOUNDER_DEMO: Statistic[] = [
     heading: "Examples",
     subHeading:
       "Can you tell me the three-stage test in Denton",
-    text:"What are the consequences of Part 36",
-    text1: "“How do I enforce a Judgment out of Jurisdiction”"
+    text: "What are the consequences of Part 36",
+    text1: "How do I enforce a Judgment out of Jurisdiction"
   },
   {
     id: "2",
     heading: "Capabilities",
-    subHeading: "Remembers what user said earlier in   the conversation",
+    subHeading: "Remembers what user said earlier in the conversation",
     text: "Allows user to provide follow-up correction",
     text1: "99.8% Accuracy"
   },
@@ -63,6 +63,7 @@ const FOUNDER_DEMO: Statistic[] = [
     text1: "Limited knowledge of events after February 2024"
   },
 ];
+
 const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
 
