@@ -161,7 +161,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             </button>
             <LeftPanelFooter
               onLogout={handleLogout}
-              className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start"
+              className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start oo"
             />
           </div>
           <Transition appear show={isOpen} as={Fragment}>
