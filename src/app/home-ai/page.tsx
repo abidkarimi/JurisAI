@@ -26,7 +26,8 @@ import LeftPanelFooter from "@/shared/LeftPanelFooter";
 import ChatWithJurisAI from "@/components/ChatWithJurisAI";
 import { Dialog, Transition } from "@headlessui/react";
 import PageSubcription from "./home-ai-components/home-ai-subscription";
-
+import axios from "axios";
+import toast from "react-hot-toast";
 export interface AuthorPageProps {
   className?: string;
 }
