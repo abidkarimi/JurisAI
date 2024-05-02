@@ -3,7 +3,7 @@ import React, { HTMLAttributes, ReactNode } from "react";
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   fontClass?: string;
   desc?: ReactNode;
-  isCenter?: boolean;
+  isCenter?: boolean|string;
 }
 
 const Heading: React.FC<HeadingProps> = ({

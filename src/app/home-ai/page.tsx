@@ -161,9 +161,6 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           className="flex  items-center   py-2 text-md font-medium text-white  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
         >
           <GoSync color={"white"} size={20}/>
-         
-           <p className="px-3">
-
               <p className="px-3">Premmium Plan</p>
             </button>
             <LeftPanelFooter
