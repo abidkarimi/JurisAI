@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import router from "next/router";
 import { useRouter } from "next/navigation";
+import PageSubscription from "@/app/home-ai/home-ai-components/home-ai-subscription";
 
 interface LoginAIProps {
   className?: string;
@@ -21,21 +22,24 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
   });
 
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
+
   const [loading, setLoading] = React.useState(false);
-  // const [loading, setLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
   const onLogin = async () => {
     try {
+      
+
       setLoading(true);
       const response = await axios.post("/api/users/login", user);
       console.log("Login success", response.data);
       toast.success("Login successful");
-
-      // Redirect to profile page on client-side
       router.push("/home-ai");
     } catch (error: any) {
       console.log("Login failed", error.message);
+      console.log("invalid creadentials");
       toast.error(error.message);
+      setLoginError("Invalid email or password.");
     } finally {
       setLoading(false);
     }
@@ -48,6 +52,7 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
       setButtonDisabled(true);
     }
   }, [user]);
+
 
   return (
     <div
@@ -99,7 +104,7 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
           </form>
           <div className="text-center mt-4">
             <span className="text-neutral-800 dark:text-neutral-200">
-              Don't have an account yet?
+              Don&apos;t have an account yet?
             </span>
             <Link
               href="/register-ai"
@@ -107,9 +112,11 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
             >
               Register for free
             </Link>
+            {loginError && <p className="font-bold text-neutral-800 dark:text-neutral-200">{loginError}</p>}
           </div>
         </div>
       </div>
+      {/* {showSubscriptionPopup && handleSubscriptionPopup()} */}
     </div>
   );
 };
