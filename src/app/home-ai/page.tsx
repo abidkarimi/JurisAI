@@ -26,6 +26,7 @@ import LeftPanelFooter from "@/shared/LeftPanelFooter";
 import ChatWithJurisAI from "@/components/ChatWithJurisAI";
 import { Dialog, Transition } from "@headlessui/react";
 import PageSubcription from "./home-ai-components/home-ai-subscription";
+import { IoMdSend } from "react-icons/io";
 
 export interface AuthorPageProps {
   className?: string;
@@ -151,11 +152,17 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         <div className="grid px-10 grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
           <div className="flex items-start flex-col ">
             <button
-              type="button"
-              onClick={openModal}
-              className="flex  items-center   py-2 text-md font-medium text-white  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
-            >
-              <GoSync color={"white"} size={20} />
+          type="button"
+          style={{ 
+            fontSize: '15px',
+            fontWeight: '400' ,
+          }}
+          onClick={openModal}
+          className="flex  items-center   py-2 text-md font-medium text-white  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          <GoSync color={"white"} size={20}/>
+         
+           <p className="px-3">
 
               <p className="px-3">Premmium Plan</p>
             </button>
@@ -312,21 +319,27 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     );
   };
   const renderQueryField = () => {
-    return (
-      <div className="space-y-5">
-        <div className="relative">
+    
+      return(
+        <div className="space-y-5" 
+        style={{position: 'sticky'}}
+        >
+        <div className="relative"
+        style={{position: 'sticky', width: "90%", margin: "auto", left:"1rem"}}
+        >
           <Input
+            
             fontClass=""
             sizeClass="h-16 px-4 py-3"
             rounded="rounded-2xl"
             placeholder="Message JurisAI"
           />
-          <ButtonCircle
-            className="absolute right-2 top-1/2 transform -translate-y-1/2"
-            size=" w-12 h-12 "
+          <button
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 "  
           >
-            <ArrowRightIcon className="w-5 h-5" />
-          </ButtonCircle>
+            <IoMdSend size={32} style={{ color:'rgba(142, 142, 160, 1)',
+  }} />
+          </button>
         </div>
       </div>
     );
@@ -492,9 +505,11 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           {/* {renderSection1()} */}
           {/* {renderSection2()} */}
           {renderInitialScreen()}
-          <div className="container pt-20 pb-0">
-            {renderChatWithJurisAI()}
-            {renderChatWithJurisAI()}
+          <div className="container pt-20 pb-0" 
+          style={{padding: '0'}}>
+          {/* > */}
+            {/* {renderChatWithJurisAI()}
+            {renderChatWithJurisAI()} */}
 
             {renderQueryField()}
           </div>
