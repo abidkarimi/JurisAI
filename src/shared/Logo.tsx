@@ -1,6 +1,6 @@
 import React from "react";
 import logoImg from "@/images/logos/logo-no-background.png";
-import logoLightImg from "@/images/logo-light.png";
+import logoLightImg from "@/images/logos/logo-light.png";
 import LogoSvgLight from "./LogoSvgLight";
 import LogoSvg from "./LogoSvg";
 import Link from "next/link";

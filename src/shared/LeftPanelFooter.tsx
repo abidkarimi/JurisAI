@@ -1,8 +1,6 @@
-import React, { FC, useState, useEffect } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useRouter } from "next/router"; // Import useRouter from next/router
+import React, { FC, useState, useEffect,Fragment } from "react";
 import { SocialType } from "@/shared/SocialsShare";
+import { Dialog, Transition } from '@headlessui/react'
 
 export interface SocialsList1Props {
   className?: string;
@@ -12,7 +10,7 @@ export interface SocialsList1Props {
 const socials: SocialType[] = [
   { name: "Clear conversations", icon: "las la-trash", href: "#" },
   { name: "Dark mode", icon: "las la-sun-moon", href: "#" },
-  { name: "Premium plan", icon: "las la-sync", href: "#" },
+  // { name: "Premium plan", icon: "las la-sync", href: "#" },
   { name: "Updates & FAQ", icon: "las la-question-circle", href: "#" },
   { name: "Logout", icon: "las la-sign-out-alt", href: "#" },
 ];
@@ -22,13 +20,30 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({
   onLogout,
 }) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+ 
+
+
+  // State variable to track whether the premium component is visible or not
+  const [isPremiumVisible, setIsPremiumVisible] = useState(false);
+
+  // Function to toggle the value of isPremiumVisible
+  const togglePremium = () => {
+    setIsPremiumVisible((prev) =>!prev);
+  };
+  
+  // Function to toggle between dark and light mode
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);
 
   return (
+    <>
     <div className={`nc-SocialsList1 ${className}`} data-nc-id="SocialsList1">
+      
       {socials.map((item, index) => {
         if (item.name === "Logout") {
           return (
@@ -65,7 +80,14 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({
           );
         }
       })}
+
+        
     </div>
+   
+
+  
+    </>
+    
   );
 };
 
