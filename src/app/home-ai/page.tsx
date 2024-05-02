@@ -26,6 +26,8 @@ import LeftPanelFooter from "@/shared/LeftPanelFooter";
 import ChatWithJurisAI from "@/components/ChatWithJurisAI";
 import { Dialog, Transition } from "@headlessui/react";
 import PageSubcription from "./home-ai-components/home-ai-subscription";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export interface AuthorPageProps {
   className?: string;
@@ -161,7 +163,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             </button>
             <LeftPanelFooter
               onLogout={handleLogout}
-              className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start oo"
+              className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start"
             />
           </div>
           <Transition appear show={isOpen} as={Fragment}>
