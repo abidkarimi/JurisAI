@@ -1,5 +1,6 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect,Fragment } from "react";
 import { SocialType } from "@/shared/SocialsShare";
+import { Dialog, Transition } from '@headlessui/react'
 
 export interface SocialsList1Props {
   className?: string;
@@ -8,7 +9,7 @@ export interface SocialsList1Props {
 const socials: SocialType[] = [
   { name: "Clear conversations", icon: "las la-trash", href: "#" },
   { name: "Dark mode", icon: "las la-sun-moon", href: "#" },
-  { name: "Premium plan", icon: "las la-sync", href: "#" },
+  // { name: "Premium plan", icon: "las la-sync", href: "#" },
   { name: "Updates & FAQ", icon: "las la-question-circle", href: "#" },
   { name: "Logout", icon: "las la-sign-out-alt", href: "#" },
 ];
@@ -16,7 +17,17 @@ const socials: SocialType[] = [
 const LeftPanelFooter: FC<SocialsList1Props> = ({ className = "space-y-2.5" }) => {
   // State variable to track the current theme mode
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+ 
 
+
+  // State variable to track whether the premium component is visible or not
+  const [isPremiumVisible, setIsPremiumVisible] = useState(false);
+
+  // Function to toggle the value of isPremiumVisible
+  const togglePremium = () => {
+    setIsPremiumVisible((prev) =>!prev);
+  };
+  
   // Function to toggle between dark and light mode
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
@@ -41,7 +52,9 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({ className = "space-y-2.5" }) =
   };
 
   return (
+    <>
     <div className={`nc-SocialsList1 ${className}`} data-nc-id="SocialsList1">
+      
       {socials.map((item, index) => {
         // Render different icon and text for "Dark mode" button based on current theme mode
         if (item.name === "Dark mode") {
@@ -59,7 +72,14 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({ className = "space-y-2.5" }) =
           return renderItem(item, index);
         }
       })}
+
+        
     </div>
+   
+
+  
+    </>
+    
   );
 };
 
