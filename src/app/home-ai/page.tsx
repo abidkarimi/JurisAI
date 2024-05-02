@@ -6,6 +6,8 @@ import CommentListing from "@/components/CommentListing";
 import ExperiencesCard from "@/components/ExperiencesCard";
 import StartRating from "@/components/StartRating";
 import StayCard from "@/components/StayCard2";
+import { GoSync } from "react-icons/go";
+import { IoSyncSharp } from "react-icons/io5";
 import {
   DEMO_CAR_LISTINGS,
   DEMO_EXPERIENCES_LISTINGS,
@@ -22,12 +24,11 @@ import Input from "@/shared/Input";
 import { ArrowRightIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import LeftPanelFooter from "@/shared/LeftPanelFooter";
 import ChatWithJurisAI from "@/components/ChatWithJurisAI";
-import axios from "axios";
-import Link from "next/link";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import router from "next/router";
+import { Dialog, Transition } from "@headlessui/react";
 import PageSubcription from "./home-ai-components/home-ai-subscription";
+import { IoMdSend } from "react-icons/io";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export interface AuthorPageProps {
   className?: string;
@@ -45,7 +46,7 @@ const FOUNDER_DEMO: Statistic[] = [
     heading: "Examples",
     subHeading: "Can you tell me the three-stage test in Denton",
     text: "What are the consequences of Part 36",
-    text1: "“How do I enforce a Judgment out of Jurisdiction”",
+    text1: "How do I enforce a Judgment out of Jurisdiction",
   },
   {
     id: "2",
@@ -62,6 +63,7 @@ const FOUNDER_DEMO: Statistic[] = [
     text1: "Limited knowledge of events after February 2024",
   },
 ];
+
 const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
   const handleLogout = async () => {
@@ -76,8 +78,13 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   };
 
   const renderSidebar = () => {
+    let [isOpen, setIsOpen] = useState(false);
+
+    function openModal() {
+      setIsOpen(true);
+    }
     return (
-      <div className=" w-full flex flex-col space-y-6 sm:space-y-3 px-0 sm:pl-0 xl:pl-0  ">
+      <div className=" w-full flex flex-col space-y-6 sm:space-y-3 px-0 sm:pl-0 xl:pl-0 h-screen">
         {/* <Avatar
           hasChecked
           hasCheckedClass="w-6 h-6 -top-0.5 right-2"
@@ -126,10 +133,10 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           className=" border-b border-neutral-200 dark:border-neutral-700 "
           style={{ borderColor: "#4d4d4f" }}
         ></div>
-        <div className="p-11"></div>
-        <div className="p-11"></div>
-        <div className="p-11"></div>
-        <div className="p-11"></div>
+        {/* <div className="p-20"></div>
+        <div className="p-10"></div>
+        <div className="p-10"></div> */}
+        <div className="h-96"></div>
 
         <div
           className="border-b border-neutral-200 dark:border-neutral-700 w-50"
@@ -144,11 +151,73 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           style={{ borderColor: "#4d4d4f" }}
         ></div>
 
-        <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
+        <div className="grid px-10 grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
+          <div className="flex items-start flex-col ">
+            <button
+          type="button"
+          style={{ 
+            fontSize: '15px',
+            fontWeight: '400' ,
+          }}
+          onClick={openModal}
+          className="flex  items-center   py-2 text-md font-medium text-white  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          <GoSync color={"white"} size={20}/>
+         
+           <p className="px-3">
+
+              <p className="px-3">Premmium Plan</p>
+            </button>
+            <LeftPanelFooter
+              onLogout={handleLogout}
+              className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start"
+            />
+          </div>
+          <Transition appear show={isOpen} as={Fragment}>
+            <Dialog
+              as="div"
+              className="relative z-10"
+              onClose={() => {
+                setIsOpen(false);
+              }}
+            >
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <div className="fixed inset-0 bg-black/25" />
+              </Transition.Child>
+
+              <div className="fixed inset-0 overflow-y-auto">
+                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                  <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                  >
+                    <Dialog.Panel className="w-full max-w-5xl transform overflow-hidden   bg-transparent p-6 text-left align-middle transition-all h-[82vh]">
+                      <PageSubcription />
+                    </Dialog.Panel>
+                  </Transition.Child>
+                </div>
+              </div>
+            </Dialog>
+          </Transition>
+        </div>
+        {/* <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
           <div className="col-span-2 flex items-center md:col-span-3">
             <LeftPanelFooter onLogout={handleLogout} />
           </div>
-        </div>
+        </div> */}
         {/* ---- */}
         {/* <div className="space-y-2 ">
           <div className="flex items-center space-x-4">
@@ -252,21 +321,27 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     );
   };
   const renderQueryField = () => {
-    return (
-      <div className="space-y-5">
-        <div className="relative">
+    
+      return(
+        <div className="space-y-5" 
+        style={{position: 'sticky'}}
+        >
+        <div className="relative"
+        style={{position: 'sticky', width: "90%", margin: "auto", left:"1rem"}}
+        >
           <Input
+            
             fontClass=""
             sizeClass="h-16 px-4 py-3"
-            rounded="rounded-3xl"
+            rounded="rounded-2xl"
             placeholder="Message JurisAI"
           />
-          <ButtonCircle
-            className="absolute right-2 top-1/2 transform -translate-y-1/2"
-            size=" w-12 h-12 "
+          <button
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 "  
           >
-            <ArrowRightIcon className="w-5 h-5" />
-          </ButtonCircle>
+            <IoMdSend size={32} style={{ color:'rgba(142, 142, 160, 1)',
+  }} />
+          </button>
         </div>
       </div>
     );
@@ -432,9 +507,11 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           {/* {renderSection1()} */}
           {/* {renderSection2()} */}
           {renderInitialScreen()}
-          <div className="container pt-20 pb-0">
-            {renderChatWithJurisAI()}
-            {renderChatWithJurisAI()}
+          <div className="container pt-20 pb-0" 
+          style={{padding: '0'}}>
+          {/* > */}
+            {/* {renderChatWithJurisAI()}
+            {renderChatWithJurisAI()} */}
 
             {renderQueryField()}
           </div>
