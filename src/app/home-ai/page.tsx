@@ -164,7 +164,6 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         >
           <GoSync color={"white"} size={20}/>
          
-           <p className="px-3">
 
               <p className="px-3">Premmium Plan</p>
             </button>
