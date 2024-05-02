@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const userSchema = new Schema({
   fullName: {
     type: String,
     required: [true, "Please provide a username"],
@@ -8,7 +10,7 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, "Please provide a email"],
+    required: [true, "Please provide an email"],
     unique: true,
   },
   password: {
@@ -22,10 +24,10 @@ const userSchema = new mongoose.Schema({
   },
   areaOfPractice: {
     type: String,
-    required: [true, "Please provide lawFirm"],
+    required: [true, "Please provide area of practice"],
     unique: false,
   },
-  isVerfied: {
+  isVerified: {
     type: Boolean,
     default: false,
   },
@@ -37,8 +39,30 @@ const userSchema = new mongoose.Schema({
   forgotPasswordTokenExpiry: Date,
   verifyToken: String,
   verifyTokenExpiry: Date,
+  subscriptionType: {
+    type: String,
+    default: "free",
+  },
+  subscriptionStartDate: Date,
+  subscriptionEndDate: Date,
+  queries: [
+    {
+      question: {
+        type: String,
+        required: true,
+      },
+      answer: {
+        type: String,
+        required: true,
+      },
+      timestamp: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
 });
 
 const User = mongoose.models.user || mongoose.model("user", userSchema);
 
-export default User;
+module.exports = User;
