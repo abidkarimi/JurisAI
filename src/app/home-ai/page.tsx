@@ -37,7 +37,7 @@ export interface Statistic {
 const FOUNDER_DEMO: Statistic[] = [
   {
     id: "1",
-    heading: "🔍 Examples",
+    heading: "Examples",
     subHeading:
       "Can you tell me the three-stage test in Denton",
     text: "What are the consequences of Part 36",
@@ -45,14 +45,14 @@ const FOUNDER_DEMO: Statistic[] = [
   },
   {
     id: "2",
-    heading: "💡 Capabilities",
+    heading: "Capabilities",
     subHeading: "Remembers what user said earlier in the conversation",
     text: "Allows user to provide follow-up correction",
     text1: "99.8% Accuracy"
   },
   {
     id: "3",
-    heading: "⚠️ Limitations",
+    heading: "Limitations",
     subHeading:
       "May rarely generate incorrect information ",
     text: "May occasionally produce harmful instructions or biased",
