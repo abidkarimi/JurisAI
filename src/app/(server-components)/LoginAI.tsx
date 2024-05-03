@@ -28,16 +28,16 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
 
   const onLogin = async () => {
     try {
-      
-
       setLoading(true);
       const response = await axios.post("/api/users/login", user);
+      const { token } = response.data; // Extract token from response
+      localStorage.setItem("token", token); // Save token to localStorage
       console.log("Login success", response.data);
       toast.success("Login successful");
       router.push("/home-ai");
     } catch (error: any) {
       console.log("Login failed", error.message);
-      console.log("invalid creadentials");
+      console.log("invalid credentials");
       toast.error(error.message);
       setLoginError("Invalid email or password.");
     } finally {
@@ -52,7 +52,6 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
       setButtonDisabled(true);
     }
   }, [user]);
-
 
   return (
     <div
@@ -112,7 +111,11 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
             >
               Register for free
             </Link>
-            {loginError && <p className="font-bold text-neutral-800 dark:text-neutral-200">{loginError}</p>}
+            {loginError && (
+              <p className="font-bold text-neutral-800 dark:text-neutral-200">
+                {loginError}
+              </p>
+            )}
           </div>
         </div>
       </div>
