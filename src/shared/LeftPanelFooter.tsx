@@ -42,7 +42,7 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({ className = "space-y-2.5" }) =
     return (
       <a
         href={item.href}
-        className="flex items-center text-2xl text-white hover:text-neutral-300 dark:text-neutral-300 dark:hover:text-white leading-none space-x-2 group"
+        className="flex items-center text-2xl text-white hover:text-neutral-300 dark:text-neutral-300 dark:hover:text-white leading-none space-x-2 group "
         key={index}
       >
         <i className={item.icon}></i>
@@ -53,7 +53,7 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({ className = "space-y-2.5" }) =
 
   return (
     <>
-    <div className={`nc-SocialsList1 ${className}`} data-nc-id="SocialsList1">
+    <div className={`nc-SocialsList1 ${className}`} data-nc-id="SocialsList1 ">
       
       {socials.map((item, index) => {
         // Render different icon and text for "Dark mode" button based on current theme mode
@@ -62,7 +62,7 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({ className = "space-y-2.5" }) =
             <button
               key={index}
               onClick={toggleDarkMode}
-              className="flex items-center text-2xl text-white hover:text-neutral-300 dark:text-neutral-300 dark:hover:text-white leading-none space-x-2 group"
+              className="flex items-center text-2xl text-white hover:text-neutral-300 dark:text-neutral-300 dark:hover:text-white leading-none space-x-2 group "
             >
               <i className={isDarkMode ? "las la-sun" : "las la-moon"}></i>
               <span className="hidden lg:block text-sm">{item.name}</span>

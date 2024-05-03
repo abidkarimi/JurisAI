@@ -19,8 +19,8 @@ const socials: SocialType[] = [
 ];
 
 const SocialsShare: FC<SocialsShareProps> = ({
-  className = "grid gap-[6px]",
-  itemClass = "w-7 h-7 text-base hover:bg-neutral-100",
+  className = "grid gap-[6px] ",
+  itemClass = "w-7 h-7 text-base hover:bg-neutral-100 gap-4",
 }) => {
   const renderItem = (item: SocialType, index: number) => {
     return (

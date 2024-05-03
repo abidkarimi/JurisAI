@@ -114,19 +114,19 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           </div>
           </div>
 
-        {/* ---- */}
         <div className=" border-b border-neutral-200 dark:border-neutral-700 " style={{ borderColor: '#4d4d4f' }}></div>
+        {/* ---- */}
         {/* <div className="p-20"></div>
         <div className="p-10"></div>
       <div className="p-10"></div> */}
-        <div className="h-3/4"></div>
+        <div className="h-3/5"></div>
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
 {/* 
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div> */}
 
         <div className="grid px-10 grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
-            <div className="flex items-start flex-col ">
+            <div className="flex items-start flex-col gap-4 ">
             <button
           type="button"
           onClick={openModal}
@@ -139,7 +139,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           Premmium Plan
           </p>
         </button>
-              <LeftPanelFooter className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start" />
+              <LeftPanelFooter className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start gap-4"/>
             </div>
             <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={()=>{setIsOpen(false)}}>
@@ -152,11 +152,11 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/25" />
+            <div className="fixed inset-0 bg-black/25"/>
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <div className="flex min-h-full items-center justify-center p-4 text-center gap-4">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -322,7 +322,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             </h6>
               <div
                 key={item.id}
-                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800  mb-10"
+                className="pl-6 p-2 bg-neutral-50 dark:bg-[#3E3F4A] rounded-2xl dark:border-neutral-800  mb-10"
               >
                 <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400">
                   {item.subHeading}
@@ -331,7 +331,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
               <div
                 key={item.id}
-                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800  mb-10"
+                className="pl-6 p-2 bg-neutral-50 dark:bg-[#3E3F4A] rounded-2xl dark:border-neutral-800  mb-10"
               >
                 <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400">
                   {item.text}
@@ -340,7 +340,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
               <div
                 key={item.id}
-                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800"
+                className="pl-6 p-2 bg-neutral-50 dark:bg-[#3E3F4A] rounded-2xl dark:border-neutral-800"
               >
                 <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400">
                   {item.text1}
@@ -455,7 +455,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   return (
     <div className={`nc-AuthorPage `}>
-      <main className="mt-0 mb-0 lg:mb-0 flex flex-col lg:flex-row">
+      <main className="mt-0 mb-0 lg:mb-0 flex flex-col lg:flex-row dark:bg-[#353440]">
         <div className="block flex-grow mb-0 lg:mb-0" style={{ backgroundColor: '#202123' }}>
           <div className="lg:sticky lg:top-0">{renderSidebar()}</div>
         </div>
