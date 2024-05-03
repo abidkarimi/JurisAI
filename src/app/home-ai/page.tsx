@@ -118,12 +118,12 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         <div className=" border-b border-neutral-200 dark:border-neutral-700 " style={{ borderColor: '#4d4d4f' }}></div>
         {/* <div className="p-20"></div>
         <div className="p-10"></div>
-        <div className="p-10"></div> */}
-        <div className="h-96"></div>
-
+      <div className="p-10"></div> */}
+        <div className="h-3/4"></div>
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
+{/* 
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
-        <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
+        <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div> */}
 
         <div className="grid px-10 grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
             <div className="flex items-start flex-col ">
