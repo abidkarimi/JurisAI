@@ -48,19 +48,50 @@ export async function GET(request: NextRequest) {
 
         // Find the user using the userId
         const user = await User.findById(userId);
+        console.log("user ", user.queries);
+
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
-
+        const plainObject = user.toObject();
+        const keys = Object.keys(plainObject);
         // Return the user's queries
         return NextResponse.json({
-            queries: user.queries,
-            success: true
+            // queries: user,
+            queries: plainObject.queries,
+            success: false
         });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+
+
+// export async function GET(request: NextRequest) {
+//     try {
+//         const reqBody = await request.json();
+//         const userId = reqBody.userId;
+
+//         if (!userId) {
+//             return NextResponse.json({ error: "User ID is required" }, { status: 400 });
+//         }
+
+//         // Find the user using the userId
+//         const user = await User.findById(userId);
+//         if (!user) {
+//             return NextResponse.json({ error: "User not found" }, { status: 404 });
+//         }
+
+//         // Return the user's queries
+//         return NextResponse.json({
+//             queries: user.queries,
+//             success: true
+//         });
+//     } catch (error: any) {
+//         return NextResponse.json({ error: error.message }, { status: 500 });
+//     }
+// }
+
 
 
 // implement this code GET method when frontend is completed

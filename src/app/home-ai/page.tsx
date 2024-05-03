@@ -13,7 +13,7 @@ import {
   DEMO_EXPERIENCES_LISTINGS,
   DEMO_STAY_LISTINGS,
 } from "@/data/listings";
-import React, { FC, Fragment, useState } from "react";
+import React, { FC, Fragment, useState, useEffect } from "react";
 import Avatar from "@/shared/Avatar";
 import ButtonSecondary from "@/shared/ButtonSecondary";
 import SocialsList from "@/shared/SocialsList";
@@ -29,6 +29,8 @@ import PageSubcription from "./home-ai-components/home-ai-subscription";
 import { IoMdSend } from "react-icons/io";
 import axios from "axios";
 import toast from "react-hot-toast";
+import jwt from "jsonwebtoken";
+import Cookies from "js-cookie";
 
 export interface AuthorPageProps {
   className?: string;
@@ -64,11 +66,49 @@ const FOUNDER_DEMO: Statistic[] = [
   },
 ];
 
+interface DecodedToken {
+  id?: string;
+  email?: string;
+  fullName?: string;
+}
+
+// const tokk = localStorage.getItem("token");
+// console.log(tokk)
+// const decodedToken = tokk ? jwt.decode(tokk) as DecodedToken : null;
+// console.log(decodedToken);
+// const userId = decodedToken?.userId;
+// const email = decodedToken?.email;
+// const username = decodedToken?.username;
+
+// console.log("User ID:", userId);
+// console.log("Email:", email);
+// console.log("Username:", username);
+
 const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
+  const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
+
+  useEffect(() => {
+    const tokk = localStorage.getItem("token");
+    console.log(tokk);
+    const decoded = tokk ? (jwt.decode(tokk) as DecodedToken) : null;
+    setDecodedToken(decoded);
+    console.log(decoded);
+  }, []);
+
+  // Use decodedToken state in your component as needed
+  const userId = decodedToken?.id;
+  const email = decodedToken?.email;
+  const fullName = decodedToken?.fullName;
+
+  console.log("User ID:", userId);
+  console.log("Email:", email);
+  console.log("Full Name:", fullName);
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
   const handleLogout = async () => {
     try {
       await axios.get("/api/users/logout");
+      localStorage.removeItem("token"); // Remove token
+      localStorage.clear();
       toast.success("Logout successful");
       window.location.href = "/login-ai";
     } catch (error: any) {
@@ -77,7 +117,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     }
   };
 
-  const renderSidebar = () => {
+  const Rendersidebar = () => {
     let [isOpen, setIsOpen] = useState(false);
 
     function openModal() {
@@ -115,7 +155,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
               className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400 pt-6 pl-8"
               style={{ color: "#ffffff", fontSize: "1.5rem" }}
             >
-              <h1>Mir Elahi</h1>
+              <h1>{fullName}</h1>
             </span>
           </div>
           <div className="flex items-center space-x-2">
@@ -123,7 +163,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
               className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400 pl-8"
               style={{ color: "#ffffff" }}
             >
-              Milahi@gmail.com
+              {email}
             </span>
           </div>
         </div>
@@ -154,15 +194,16 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         <div className="grid px-10 grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
           <div className="flex items-start flex-col ">
             <button
-          type="button"
-          style={{ 
-            fontSize: '15px',
-            fontWeight: '400' ,
-          }}
-          onClick={openModal}
-          className="flex  items-center   py-2 text-md font-medium text-white  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
-        >
-          <GoSync color={"white"} size={20}/>
+              type="button"
+              style={{
+                fontSize: "15px",
+                fontWeight: "400",
+              }}
+              onClick={openModal}
+              className="flex  items-center   py-2 text-md font-medium text-white  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+            >
+              <GoSync color={"white"} size={20} />
+
               <p className="px-3">Premmium Plan</p>
             </button>
             <LeftPanelFooter
@@ -318,26 +359,25 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     );
   };
   const renderQueryField = () => {
-    
-      return(
-        <div className="space-y-5" 
-        style={{position: 'sticky'}}
-        >
-        <div className="relative"
-        style={{position: 'sticky', width: "90%", margin: "auto", left:"1rem"}}
+    return (
+      <div className="space-y-5" style={{ position: "sticky" }}>
+        <div
+          className="relative"
+          style={{
+            position: "sticky",
+            width: "90%",
+            margin: "auto",
+            left: "1rem",
+          }}
         >
           <Input
-            
             fontClass=""
             sizeClass="h-16 px-4 py-3"
             rounded="rounded-2xl"
             placeholder="Message JurisAI"
           />
-          <button
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 "  
-          >
-            <IoMdSend size={32} style={{ color:'rgba(142, 142, 160, 1)',
-  }} />
+          <button className="absolute right-2 top-1/2 transform -translate-y-1/2 ">
+            <IoMdSend size={32} style={{ color: "rgba(142, 142, 160, 1)" }} />
           </button>
         </div>
       </div>
@@ -350,11 +390,13 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         <div className="flex items-center justify-center">
           <Logo className="w-20" />
         </div>
-        <Heading desc="" isCenter="true">
+        <Heading desc="" isCenter={true}>
           Welcome to JurisAI
         </Heading>
+
         <div className="container grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8">
           {FOUNDER_DEMO.map((item) => (
+            // eslint-disable-next-line react/jsx-key
             <div>
               <h6 className="text-lg leading-none text-neutral-900 md:text-xl dark:text-neutral-200 text-center mb-10">
                 {item.heading}
@@ -498,15 +540,14 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           className="block flex-grow mb-0 lg:mb-0"
           style={{ backgroundColor: "#202123" }}
         >
-          <div className="lg:sticky lg:top-0">{renderSidebar()}</div>
+          <div className="lg:sticky lg:top-0">{Rendersidebar()}</div>
         </div>
         <div className="w-full lg:w-3/5 xl:w-4/5 space-y-8 lg:space-y-10 lg:pl-0 flex-shrink-0">
           {/* {renderSection1()} */}
           {/* {renderSection2()} */}
           {renderInitialScreen()}
-          <div className="container pt-20 pb-0" 
-          style={{padding: '0'}}>
-          {/* > */}
+          <div className="container pt-20 pb-0" style={{ padding: "0" }}>
+            {/* > */}
             {/* {renderChatWithJurisAI()}
             {renderChatWithJurisAI()} */}
 
