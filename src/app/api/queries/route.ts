@@ -54,12 +54,12 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
         const plainObject = user.toObject();
-        const keys = Object.keys(plainObject);
+        // const keys = Object.keys(plainObject);
         // Return the user's queries
         return NextResponse.json({
             // queries: user,
             queries: plainObject.queries,
-            success: false
+            success: true
         });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
