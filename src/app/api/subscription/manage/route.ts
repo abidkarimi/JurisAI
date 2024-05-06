@@ -26,8 +26,10 @@ export async function POST(request: NextRequest) {
             user.subscriptionType = newSubscriptionType;
             user.subscriptionStartDate = new Date();
             if (newSubscriptionType === "free") {
+                user.subscriptionType = "free";
                 user.subscriptionEndDate = new Date();
                 user.subscriptionEndDate.setDate(user.subscriptionEndDate.getDate() + 3); // Three days trial
+                console.log('three days trial')
             } else if (newSubscriptionType === "monthly") {
                 user.subscriptionType = "monthly";
                 user.subscriptionEndDate = new Date();
@@ -35,17 +37,23 @@ export async function POST(request: NextRequest) {
             }
         }
 
+        // Save the updated user data
         await user.save();
 
-        return NextResponse.json({
+        // Include subscriptionType in the response
+        const responseData = {
             message: "Subscription updated successfully",
             success: true,
-            // user
-        });
+            subscriptionType: user.subscriptionType, // Include subscriptionType in the response
+        };
+
+        return NextResponse.json(responseData);
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+
+
 
 // import User from "@/models/userModel";
 // import { NextRequest, NextResponse } from "next/server";
