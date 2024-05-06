@@ -24,9 +24,8 @@ import Input from "@/shared/Input";
 import { ArrowRightIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import LeftPanelFooter from "@/shared/LeftPanelFooter";
 import ChatWithJurisAI from "@/components/ChatWithJurisAI";
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, Transition } from "@headlessui/react";
 import PageSubcription from "./home-ai-components/home-ai-subscription";
-
 
 export interface AuthorPageProps {
   className?: string;
@@ -35,32 +34,30 @@ export interface Statistic {
   id: string;
   heading: string;
   subHeading: string;
-  text: string,
-  text1: string
+  text: string;
+  text1: string;
 }
 const FOUNDER_DEMO: Statistic[] = [
   {
     id: "1",
     heading: "Examples",
-    subHeading:
-      "Can you tell me the three-stage test in Denton",
+    subHeading: "Can you tell me the three-stage test in Denton",
     text: "What are the consequences of Part 36",
-    text1: "How do I enforce a Judgment out of Jurisdiction"
+    text1: "How do I enforce a Judgment out of Jurisdiction",
   },
   {
     id: "2",
     heading: "Capabilities",
     subHeading: "Remembers what user said earlier in the conversation",
     text: "Allows user to provide follow-up correction",
-    text1: "99.8% Accuracy"
+    text1: "99.8% Accuracy",
   },
   {
     id: "3",
     heading: "Limitations",
-    subHeading:
-      "May rarely generate incorrect information ",
+    subHeading: "May rarely generate incorrect information ",
     text: "May occasionally produce harmful instructions or biased",
-    text1: "Limited knowledge of events after February 2024"
+    text1: "Limited knowledge of events after February 2024",
   },
 ];
 
@@ -68,12 +65,10 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
 
   const renderSidebar = () => {
-    let [isOpen, setIsOpen] = useState(false)
+    let [isOpen, setIsOpen] = useState(false);
 
-  
-  
     function openModal() {
-      setIsOpen(true)
+      setIsOpen(true);
     }
     return (
       <div className=" w-full flex flex-col space-y-6 sm:space-y-3 px-0 sm:pl-0 xl:pl-0 h-screen">
@@ -102,80 +97,94 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         /> */}
 
         <div className="space-y-0">
-        <div className="flex items-center ">
-            <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400 pt-6 pl-8" style={{ color: '#ffffff' , fontSize: '1.5rem'}}>
+          <div className="flex items-center ">
+            <span
+              className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400 pt-6 pl-8"
+              style={{ color: "#ffffff", fontSize: "1.5rem" }}
+            >
               <h1>Mir Elahi</h1>
             </span>
           </div>
           <div className="flex items-center space-x-2">
-            <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400 pl-8" style={{ color: '#ffffff' }}>
+            <span
+              className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400 pl-8"
+              style={{ color: "#ffffff" }}
+            >
               Milahi@gmail.com
             </span>
           </div>
-          </div>
+        </div>
 
-        <div className=" border-b border-neutral-200 dark:border-neutral-700 " style={{ borderColor: '#4d4d4f' }}></div>
+        <div
+          className=" border-b border-neutral-200 dark:border-neutral-700 "
+          style={{ borderColor: "#4d4d4f" }}
+        ></div>
         {/* ---- */}
         {/* <div className="p-20"></div>
         <div className="p-10"></div>
       <div className="p-10"></div> */}
         <div className="h-3/5"></div>
-        <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
-{/* 
+        <div
+          className="border-b border-neutral-200 dark:border-neutral-700 w-50"
+          style={{ borderColor: "#4d4d4f" }}
+        ></div>
+        {/* 
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div>
         <div className="border-b border-neutral-200 dark:border-neutral-700 w-50" style={{ borderColor: '#4d4d4f' }}></div> */}
 
         <div className="grid px-10 grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
-            <div className="flex items-start flex-col gap-4 ">
+          <div className="flex items-start flex-col gap-4 ">
             <button
-          type="button"
-          onClick={openModal}
-          className="flex  items-center   py-2 text-md font-medium text-white  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
-        >
-          <GoSync color={"white"} size={20}/>
-         
-           <p className="px-3">
+              type="button"
+              onClick={openModal}
+              className="flex  items-center   py-2 text-md font-medium text-white  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+            >
+              <GoSync color={"white"} size={20} />
 
-          Premmium Plan
-          </p>
-        </button>
-              <LeftPanelFooter className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start gap-4"/>
-            </div>
-            <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={()=>{setIsOpen(false)}}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black/25"/>
-          </Transition.Child>
-
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center gap-4">
+              <p className="px-3">Premmium Plan</p>
+            </button>
+            <LeftPanelFooter className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start gap-4" />
+          </div>
+          <Transition appear show={isOpen} as={Fragment}>
+            <Dialog
+              as="div"
+              className="relative z-10"
+              onClose={() => {
+                setIsOpen(false);
+              }}
+            >
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
                 leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
               >
-                <Dialog.Panel className="w-full max-w-5xl transform overflow-hidden   bg-transparent p-6 text-left align-middle transition-all h-[82vh]">
-
-                <PageSubcription />
-                </Dialog.Panel>
+                <div className="fixed inset-0 bg-black/25" />
               </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
-          </div>
+
+              <div className="fixed inset-0 overflow-y-auto">
+                <div className="flex min-h-full items-center justify-center p-4 text-center gap-4">
+                  <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                  >
+                    <Dialog.Panel className="w-full max-w-5xl transform overflow-hidden   bg-transparent p-6 text-left align-middle transition-all h-[82vh]">
+                      <PageSubcription />
+                    </Dialog.Panel>
+                  </Transition.Child>
+                </div>
+              </div>
+            </Dialog>
+          </Transition>
+        </div>
         {/* ---- */}
         {/* <div className="space-y-2 ">
           <div className="flex items-center space-x-4">
@@ -279,9 +288,8 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     );
   };
   const renderQueryField = () => {
-    
-      return(
-        <div className="space-y-5">
+    return (
+      <div className="space-y-5">
         <div className="relative">
           <Input
             fontClass=""
@@ -297,29 +305,24 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           </ButtonCircle>
         </div>
       </div>
-      )
-
-  }
+    );
+  };
   const renderInitialScreen = () => {
     return (
       <div className={`nc-SectionStatistic relative ${className}`}>
         <div className="p-10"></div>
-        <div className="flex items-center justify-center" >
-        <Logo className="w-20" />
+        <div className="flex items-center justify-center">
+          <Logo className="w-20" />
         </div>
-      <Heading
-        desc=""
-        isCenter = 'true'
-      >
-        Welcome to JurisAI
-      </Heading>
-      <div className="container grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8">
-        {FOUNDER_DEMO.map((item) => (
-          <div>
-            
-            <h6 className="text-lg leading-none text-neutral-900 md:text-xl dark:text-neutral-200 text-center mb-10">
-              {item.heading}
-            </h6>
+        <Heading desc="" isCenter={true}>
+          Welcome to JurisAI
+        </Heading>
+        <div className="container grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8">
+          {FOUNDER_DEMO.map((item) => (
+            <div>
+              <h6 className="text-lg leading-none text-neutral-900 md:text-xl dark:text-neutral-200 text-center mb-10">
+                {item.heading}
+              </h6>
               <div
                 key={item.id}
                 className="pl-6 p-2 bg-neutral-50 dark:bg-[#3E3F4A] rounded-2xl dark:border-neutral-800  mb-10"
@@ -346,13 +349,12 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
                   {item.text1}
                 </span>
               </div>
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-    )
-
-  }
+    );
+  };
   const renderSection1 = () => {
     return (
       <div className="listingSection__wrap rounded-none">
@@ -445,18 +447,21 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     );
   };
 
-  const renderChatWithJurisAI = ( ) => {
-    return(
+  const renderChatWithJurisAI = () => {
+    return (
       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
         <ChatWithJurisAI className="py-8" />
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className={`nc-AuthorPage `}>
       <main className="mt-0 mb-0 lg:mb-0 flex flex-col lg:flex-row dark:bg-[#353440]">
-        <div className="block flex-grow mb-0 lg:mb-0" style={{ backgroundColor: '#202123' }}>
+        <div
+          className="block flex-grow mb-0 lg:mb-0"
+          style={{ backgroundColor: "#202123" }}
+        >
           <div className="lg:sticky lg:top-0">{renderSidebar()}</div>
         </div>
         <div className="w-full lg:w-3/5 xl:w-4/5 space-y-8 lg:space-y-10 lg:pl-0 flex-shrink-0">
@@ -467,13 +472,11 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             {renderChatWithJurisAI()}
             {renderChatWithJurisAI()}
 
-          {renderQueryField()}
-
+            {renderQueryField()}
           </div>
         </div>
       </main>
     </div>
-    
   );
 };
 
