@@ -66,6 +66,7 @@ const FOUNDER_DEMO: Statistic[] = [
 
 const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
+
   const handleLogout = async () => {
     try {
       await axios.get("/api/users/logout");
@@ -327,7 +328,8 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         style={{position: 'sticky', width: "90%", margin: "auto", left:"1rem"}}
         >
           <Input
-            
+            value={query}
+            onChange={(e)=> setQuery(e.target.value)}
             fontClass=""
             sizeClass="h-16 px-4 py-3"
             rounded="rounded-2xl"
@@ -344,16 +346,18 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     );
   };
   const renderInitialScreen = () => {
+
     return (
       <div className={`nc-SectionStatistic relative ${className}`}>
-        <div className="p-10"></div>
+        {/* <div className="p-10"></div> */}
         <div className="flex items-center justify-center">
           <Logo className="w-20" />
         </div>
-        <Heading desc="" isCenter="true">
+        <Heading desc="" isCenter="true" >
           Welcome to JurisAI
         </Heading>
-        <div className="container grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8">
+     
+  <div className="container grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8">
           {FOUNDER_DEMO.map((item) => (
             <div>
               <h6 className="text-lg leading-none text-neutral-900 md:text-xl dark:text-neutral-200 text-center mb-10">
@@ -391,126 +395,185 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       </div>
     );
   };
-  const renderSection1 = () => {
-    return (
-      <div className="listingSection__wrap rounded-none">
-        <div>
-          <h2 className="text-2xl font-semibold">{`Kevin Francis's listings`}</h2>
-          <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            {`Kevin Francis's listings is very rich, 5 star reviews help him to be
-            more branded.`}
-          </span>
-        </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+  // const renderSection1 = () => {
+  //   return (
+  //     <div className="listingSection__wrap rounded-none">
+  //       <div>
+  //         <h2 className="text-2xl font-semibold">{`Kevin Francis's listings`}</h2>
+  //         <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
+  //           {`Kevin Francis's listings is very rich, 5 star reviews help him to be
+  //           more branded.`}
+  //         </span>
+  //       </div>
+  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
 
-        <div>
-          <Tab.Group>
-            <Tab.List className="flex space-x-1 overflow-x-auto">
-              {categories.map((item) => (
-                <Tab key={item} as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={`flex-shrink-0 block !leading-none font-medium px-5 py-2.5 text-sm sm:text-base sm:px-6 sm:py-3 capitalize rounded-full focus:outline-none ${
-                        selected
-                          ? "bg-secondary-900 text-secondary-50 "
-                          : "text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-100 hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      } `}
-                    >
-                      {item}
-                    </button>
-                  )}
-                </Tab>
-              ))}
-            </Tab.List>
-            <Tab.Panels>
-              <Tab.Panel className="">
-                <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
-                  {DEMO_STAY_LISTINGS.filter((_, i) => i < 4).map((stay) => (
-                    <StayCard key={stay.id} data={stay} />
-                  ))}
-                </div>
-                <div className="flex mt-11 justify-center items-center">
-                  <ButtonSecondary>Show me more</ButtonSecondary>
-                </div>
-              </Tab.Panel>
-              <Tab.Panel className="">
-                <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
-                  {DEMO_EXPERIENCES_LISTINGS.filter((_, i) => i < 4).map(
-                    (stay) => (
-                      <ExperiencesCard key={stay.id} data={stay} />
-                    )
-                  )}
-                </div>
-                <div className="flex mt-11 justify-center items-center">
-                  <ButtonSecondary>Show me more</ButtonSecondary>
-                </div>
-              </Tab.Panel>
-              <Tab.Panel className="">
-                <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
-                  {DEMO_CAR_LISTINGS.filter((_, i) => i < 4).map((stay) => (
-                    <CarCard key={stay.id} data={stay} />
-                  ))}
-                </div>
-                <div className="flex mt-11 justify-center items-center">
-                  <ButtonSecondary>Show me more</ButtonSecondary>
-                </div>
-              </Tab.Panel>
-            </Tab.Panels>
-          </Tab.Group>
-        </div>
-      </div>
-    );
+  //       <div>
+  //         <Tab.Group>
+  //           <Tab.List className="flex space-x-1 overflow-x-auto">
+  //             {categories.map((item) => (
+  //               <Tab key={item} as={Fragment}>
+  //                 {({ selected }) => (
+  //                   <button
+  //                     className={`flex-shrink-0 block !leading-none font-medium px-5 py-2.5 text-sm sm:text-base sm:px-6 sm:py-3 capitalize rounded-full focus:outline-none ${
+  //                       selected
+  //                         ? "bg-secondary-900 text-secondary-50 "
+  //                         : "text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-100 hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+  //                     } `}
+  //                   >
+  //                     {item}
+  //                   </button>
+  //                 )}
+  //               </Tab>
+  //             ))}
+  //           </Tab.List>
+  //           <Tab.Panels>
+  //             <Tab.Panel className="">
+  //               <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
+  //                 {DEMO_STAY_LISTINGS.filter((_, i) => i < 4).map((stay) => (
+  //                   <StayCard key={stay.id} data={stay} />
+  //                 ))}
+  //               </div>
+  //               <div className="flex mt-11 justify-center items-center">
+  //                 <ButtonSecondary>Show me more</ButtonSecondary>
+  //               </div>
+  //             </Tab.Panel>
+  //             <Tab.Panel className="">
+  //               <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
+  //                 {DEMO_EXPERIENCES_LISTINGS.filter((_, i) => i < 4).map(
+  //                   (stay) => (
+  //                     <ExperiencesCard key={stay.id} data={stay} />
+  //                   )
+  //                 )}
+  //               </div>
+  //               <div className="flex mt-11 justify-center items-center">
+  //                 <ButtonSecondary>Show me more</ButtonSecondary>
+  //               </div>
+  //             </Tab.Panel>
+  //             <Tab.Panel className="">
+  //               <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
+  //                 {DEMO_CAR_LISTINGS.filter((_, i) => i < 4).map((stay) => (
+  //                   <CarCard key={stay.id} data={stay} />
+  //                 ))}
+  //               </div>
+  //               <div className="flex mt-11 justify-center items-center">
+  //                 <ButtonSecondary>Show me more</ButtonSecondary>
+  //               </div>
+  //             </Tab.Panel>
+  //           </Tab.Panels>
+  //         </Tab.Group>
+  //       </div>
+  //     </div>
+  //   );
+  // };
+
+  // const renderSection2 = () => {
+  //   return (
+  //     <div className="listingSection__wrap">
+  //       {/* HEADING */}
+  //       <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
+  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+
+  //       {/* comment */}
+  //       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+  //         <CommentListing hasListingTitle className="pb-8" />
+  //         <CommentListing hasListingTitle className="py-8" />
+  //         <CommentListing hasListingTitle className="py-8" />
+  //         <CommentListing hasListingTitle className="py-8" />
+  //         <div className="pt-8">
+  //           <ButtonSecondary>View more 20 reviews</ButtonSecondary>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
+
+  const [query, setQuery] = useState(""); // State to store the input value
+
+  const onInputChange = (event) => {
+    setQuery(event.target.value);
   };
 
-  const renderSection2 = () => {
-    return (
-      <div className="listingSection__wrap">
-        {/* HEADING */}
-        <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+  console.log("query",query)
 
-        {/* comment */}
-        <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          <CommentListing hasListingTitle className="pb-8" />
-          <CommentListing hasListingTitle className="py-8" />
-          <CommentListing hasListingTitle className="py-8" />
-          <CommentListing hasListingTitle className="py-8" />
-          <div className="pt-8">
-            <ButtonSecondary>View more 20 reviews</ButtonSecondary>
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   const renderChatWithJurisAI = () => {
     return (
       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-        <ChatWithJurisAI className="py-8" />
+        <ChatWithJurisAI
+        
+        className="py-8" />
       </div>
     );
   };
 
+
+const [enter ,setEnter] = useState(false)
+
+
+
+
+
   return (
     <div className={`nc-AuthorPage `}>
-      <main className="mt-0 mb-0 lg:mb-0 flex flex-col lg:flex-row">
+      <main className="mt-0 mb-0 lg:mb-0 flex flex-col lg:flex-row "
+        style={{height: '100vh'}}
+      >
         <div
           className="block flex-grow mb-0 lg:mb-0"
           style={{ backgroundColor: "#202123" }}
         >
           <div className="lg:sticky lg:top-0">{renderSidebar()}</div>
         </div>
-        <div className="w-full lg:w-3/5 xl:w-4/5 space-y-8 lg:space-y-10 lg:pl-0 flex-shrink-0">
+        <div className="w-full lg:w-3/5 xl:w-4/5 space-y-8 lg:space-y-10 lg:pl-0 flex-shrink-0"
+        style={
+          {
+          height: '100vh',
+          padding: '3rem',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+          }
+      }
+        >
           {/* {renderSection1()} */}
           {/* {renderSection2()} */}
-          {renderInitialScreen()}
+
+
+          { enter ?   renderChatWithJurisAI():renderInitialScreen()}
           <div className="container pt-20 pb-0" 
           style={{padding: '0'}}>
           {/* > */}
             {/* {renderChatWithJurisAI()}
             {renderChatWithJurisAI()} */}
 
-            {renderQueryField()}
+            {/* {renderQueryField()} */}
+             <div className="space-y-5" 
+        style={{position: 'sticky'}}
+        >
+        <div className="relative"
+        style={{position: 'sticky', width: "90%", margin: "auto", left:"1rem"}}
+        >
+          <Input
+            
+            fontClass=""
+            sizeClass="h-16 px-4 py-3"
+            rounded="rounded-2xl"
+            placeholder="Message JurisAI"
+            value={query} // Value is set to the query state
+            onChange={onInputChange}
+            
+
+          />
+          <button
+          onClick={() => setEnter(true)}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 "  
+          >
+            <IoMdSend size={32} style={{ color:'rgba(142, 142, 160, 1)',
+  }} />
+          </button>
+        </div>
+      </div>
           </div>
         </div>
       </main>
