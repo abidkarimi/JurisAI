@@ -72,18 +72,6 @@ interface DecodedToken {
   fullName?: string;
 }
 
-// const tokk = localStorage.getItem("token");
-// console.log(tokk)
-// const decodedToken = tokk ? jwt.decode(tokk) as DecodedToken : null;
-// console.log(decodedToken);
-// const userId = decodedToken?.userId;
-// const email = decodedToken?.email;
-// const username = decodedToken?.username;
-
-// console.log("User ID:", userId);
-// console.log("Email:", email);
-// console.log("Username:", username);
-
 const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
 
@@ -100,9 +88,6 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const email = decodedToken?.email;
   const fullName = decodedToken?.fullName;
 
-  console.log("User ID:", userId);
-  console.log("Email:", email);
-  console.log("Full Name:", fullName);
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
 
   const handleLogout = async () => {
@@ -244,7 +229,40 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
                     leaveTo="opacity-0 scale-95"
                   >
                     <Dialog.Panel className="w-full max-w-5xl transform overflow-hidden   bg-transparent p-6 text-left align-middle transition-all h-[82vh]">
-                      <PageSubcription />
+                      <PageSubcription
+                        pricings={[
+                          {
+                            isPopular: false,
+                            name: "Free",
+                            pricing: "€0 ",
+                            per: "/mo",
+                            desc: ` “Welcome to JurisAI! Please note that we currently offer one three-day free trial per law firm. After the trial period ends, access to JurisAI will require a paid subscription. Thank you for choosing JurisAI”`,
+                            features: [
+                              "Automated Reporting",
+                              "Faster Processing",
+                              "Customizations",
+                            ],
+                          },
+                          {
+                            isPopular: false,
+                            name: "Basic",
+                            pricing: "€200",
+                            per: "/mo",
+                            features: [
+                              "Exclusive features and updates.",
+                              "Priority customer support.",
+                              "Regular newsletters and insights.",
+                              "No Contact – Cancel Anytime.",
+                            ],
+                            desc: ` “We are looking to introduce further subscription plans in the near future. However, currently, this service has been specifically designed for the use of law firms specialising in the civil litigation area of law. 
+                          
+                      
+                          
+                          Subscribe today to unlock a world of possibilities and elevate your experience with
+                          ”`,
+                          },
+                        ]}
+                      />
                     </Dialog.Panel>
                   </Transition.Child>
                 </div>

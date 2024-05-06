@@ -39,10 +39,7 @@ const userSchema = new Schema({
   forgotPasswordTokenExpiry: Date,
   verifyToken: String,
   verifyTokenExpiry: Date,
-  subscriptionType: {
-    type: String,
-    default: "free",
-  },
+  subscriptionType: String,
   subscriptionStartDate: Date,
   subscriptionEndDate: Date,
   queries: [
