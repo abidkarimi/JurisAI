@@ -18,11 +18,11 @@ export interface CommentListingProps {
 }
 
 const DEMO_DATA: CommentListingDataType = {
-  query:"Query from User",
+  query: "Query from User",
   response:
-  "Response from Model",
-  
-  
+    "Response from Model",
+
+
 };
 
 const ChatWithJurisAI: FC<CommentListingProps> = ({
@@ -31,32 +31,32 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
   hasListingTitle,
 
 }) => {
-  
+
   return (
     <>
-    <div
-      className={`nc-CommentListing flex space-x-4 ${className}`}
-      data-nc-id="CommentListing"
-      style={{
-        display:  "flex",
-        justifyContent: "center",
-        alignItems: "space-between",
-      }}
-    >
-      {/* This image of either Querier or Response from JurisAI */}
-      <div className="pt-0.5">
-        <Avatar
-          sizeClass="h-10 w-10 text-lg"
-          radius="rounded-full"
-          userName={data.name}
-          imgUrl={data.avatar}
-        />
-      </div>
-      <div className="flex-grow">
-        <div className="flex justify-between space-x-3">
-          <div className="flex flex-col">
-            {/* No need of name so commenting */}
-            {/* <div className="text-sm font-semibold">
+      <div
+        className={`nc-CommentListing flex space-x-4 ${className}`}
+        data-nc-id="CommentListing"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "space-between",
+        }}
+      >
+        {/* This image of either Querier or Response from JurisAI */}
+        <div className="pt-0.5">
+          <Avatar
+            sizeClass="h-10 w-10 text-lg"
+            radius="rounded-full"
+            userName={data.name}
+            imgUrl={data.avatar}
+          />
+        </div>
+        <div className="flex-grow">
+          <div className="flex justify-between space-x-3">
+            <div className="flex flex-col">
+              {/* No need of name so commenting */}
+              {/* <div className="text-sm font-semibold">
               <span>{data.name}</span>
               {hasListingTitle && (
                 <>
@@ -67,65 +67,65 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
                 </>
               )}
             </div> */}
-            {/* Commenting date as date is not required in app as per design */}
-            {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
+              {/* Commenting date as date is not required in app as per design */}
+              {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
               {data.date}
             </span> */}
-          </div>
-          <div className="flex"
-            style={
-              {
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
+            </div>
+            <div className="flex"
+              style={
+                {
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }
               }
-            }
-          >
-            <BiLike  className="w-4 h-4" style={{cursor: 'pointer'}} />
-            <BiDislike className="w-4 h-4" style={{cursor: 'pointer'}} />
+            >
+              <BiLike className="w-4 h-4" style={{ cursor: 'pointer' }} />
+              <BiDislike className="w-4 h-4" style={{ cursor: 'pointer' }} />
+            </div>
           </div>
+          <span className="block mt-3 text-neutral-6000 dark:text-neutral-300"
+            style={{
+              width: '910px',
+              height: 'auto',
+            }}
+          >
+            {data.query}
+          </span>
         </div>
-        <span className="block mt-3 text-neutral-6000 dark:text-neutral-300"
-          style={{
-            width: '910px',
-            height:'auto',
-          }}
-        >
-          {data.query}
-        </span>
       </div>
-    </div>
 
 
-    {/* {the component to display response from model} */}
-    
-    <div
-      className={`nc-CommentListing bg-[#f5f5f9] flex space-x-4 ${className}`}
-      data-nc-id="CommentListing"
-      style={
-        {
-          paddingLeft: '10px',
-          paddingRight: '10px',
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'center'
+      {/* {the component to display response from model} */}
+
+      <div
+        className={`nc-CommentListing bg-[#f5f5f9] dark:bg-[#111827] flex space-x-4 ${className}`}
+        data-nc-id="CommentListing"
+        style={
+          {
+            paddingLeft: '10px',
+            paddingRight: '10px',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center'
+          }
         }
-      }
-    >
-      {/* This image of either Querier or Response from JurisAI */}
-      <div className="pt-0.5">
-        <Avatar
-          sizeClass="h-10 w-10 text-lg"
-          radius="rounded-full"
-          userName={data.name}
-          imgUrl={data.avatar}
-        />
-      </div>
-      <div className="flex-grow">
-        <div className="flex justify-between space-x-3">
-          <div className="flex flex-col">
-            {/* No need of name so commenting */}
-            {/* <div className="text-sm font-semibold">
+      >
+        {/* This image of either Querier or Response from JurisAI */}
+        <div className="pt-0.5">
+          <Avatar
+            sizeClass="h-10 w-10 text-lg"
+            radius="rounded-full"
+            userName={data.name}
+            imgUrl={data.avatar}
+          />
+        </div>
+        <div className="flex-grow">
+          <div className="flex justify-between space-x-3">
+            <div className="flex flex-col">
+              {/* No need of name so commenting */}
+              {/* <div className="text-sm font-semibold">
               <span>{data.name}</span>
               {hasListingTitle && (
                 <>
@@ -136,35 +136,35 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
                 </>
               )}
             </div> */}
-            {/* Commenting date as date is not required in app as per design */}
-            {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
+              {/* Commenting date as date is not required in app as per design */}
+              {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
               {data.date}
             </span> */}
-          </div>
-          <div className="flex"
-            style={
-              {
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                
+            </div>
+            <div className="flex"
+              style={
+                {
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+
+                }
               }
-            }
-          >
-            <BiLike  className="w-4 h-4" style={{cursor: 'pointer'}} />
-            <BiDislike className="w-4 h-4" style={{cursor: 'pointer'}} />
+            >
+              <BiLike className="w-4 h-4" style={{ cursor: 'pointer' }} />
+              <BiDislike className="w-4 h-4" style={{ cursor: 'pointer' }} />
+            </div>
           </div>
+          <span className="block mt-3 text-neutral-6000 dark:text-neutral-300"
+            style={{
+              width: '910px',
+              height: 'auto',
+            }}
+          >
+            {data.response}
+          </span>
         </div>
-        <span className="block mt-3 text-neutral-6000 dark:text-neutral-300"
-          style={{
-            width: '910px',
-            height:'auto',
-          }}
-        >
-          {data.response}
-        </span>
       </div>
-    </div>
 
     </>
   );
