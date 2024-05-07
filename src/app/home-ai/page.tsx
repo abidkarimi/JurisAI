@@ -415,16 +415,16 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           Welcome to JurisAI
         </Heading>
 
-        <div className="container grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8">
+        <div className="container grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8 ">
           {FOUNDER_DEMO.map((item) => (
             // eslint-disable-next-line react/jsx-key
             <div>
-              <h6 className="text-lg leading-none text-neutral-900 md:text-xl dark:text-neutral-200 text-center mb-10">
+              <h6 className="text-lg leading-none text-neutral-900 md:text-xl dark:text-neutral-200 text-center mb-10 ">
                 {item.heading}
               </h6>
               <div
                 key={item.id}
-                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800  mb-10"
+                className="pl-6 p-2 bg-neutral-50 dark:bg-[#3E3F4A] rounded-2xl dark:border-neutral-800  mb-10 "
               >
                 <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400">
                   {item.subHeading}
@@ -433,7 +433,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
               <div
                 key={item.id}
-                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800  mb-10"
+                className="pl-6 p-2 bg-neutral-50 dark:bg-[#3E3F4A]  rounded-2xl dark:border-neutral-800  mb-10"
               >
                 <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400">
                   {item.text}
@@ -442,7 +442,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
               <div
                 key={item.id}
-                className="pl-6 p-2 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800"
+                className="pl-6 p-2 bg-neutral-50 dark:bg-[#3E3F4A]  rounded-2xl dark:border-neutral-800"
               >
                 <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400">
                   {item.text1}
@@ -577,7 +577,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           <div className="lg:sticky lg:top-0">{Rendersidebar()}</div>
         </div>
         <div
-          className="w-full lg:w-3/5 xl:w-4/5 space-y-8 lg:space-y-10 lg:pl-0 flex-shrink-0"
+          className="w-full lg:w-3/5 xl:w-4/5 space-y-8 lg:space-y-10 lg:pl-0 flex-shrink-0 dark:bg-[#343540]"
           style={{
             height: "100vh",
             padding: "3rem",
