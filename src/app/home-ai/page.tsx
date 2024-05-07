@@ -162,23 +162,23 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         {/* <div className="p-20"></div>
         <div className="p-10"></div>
         <div className="p-10"></div> */}
-        <div className="h-96"></div>
+        <div className="h-3/4"></div>
 
-        <div
+        {/* <div
           className="border-b border-neutral-200 dark:border-neutral-700 w-50"
           style={{ borderColor: "#4d4d4f" }}
         ></div>
         <div
           className="border-b border-neutral-200 dark:border-neutral-700 w-50"
           style={{ borderColor: "#4d4d4f" }}
-        ></div>
+        ></div> */}
         <div
           className="border-b border-neutral-200 dark:border-neutral-700 w-50"
           style={{ borderColor: "#4d4d4f" }}
         ></div>
 
         <div className="grid px-10 grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
-          <div className="flex items-start flex-col ">
+          <div className="flex items-start flex-col gap-4 ">
             <button
               type="button"
               style={{
@@ -194,7 +194,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             </button>
             <LeftPanelFooter
               onLogout={handleLogout}
-              className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start"
+              className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start gap-4"
             />
           </div>
           <Transition appear show={isOpen} as={Fragment}>
@@ -405,14 +405,13 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     );
   };
   const renderInitialScreen = () => {
-
     return (
       <div className={`nc-SectionStatistic relative ${className}`}>
         {/* <div className="p-10"></div> */}
         <div className="flex items-center justify-center">
           <Logo className="w-20" />
         </div>
-        <Heading desc="" isCenter="true" >
+        <Heading desc="" isCenter="true">
           Welcome to JurisAI
         </Heading>
 
@@ -553,30 +552,23 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     setQuery(event.target.value);
   };
 
-  console.log("query", query)
-
+  console.log("query", query);
 
   const renderChatWithJurisAI = () => {
     return (
       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-        <ChatWithJurisAI
-
-          className="py-8" />
+        <ChatWithJurisAI className="py-8" />
       </div>
     );
   };
 
-
-  const [enter, setEnter] = useState(false)
-
-
-
-
+  const [enter, setEnter] = useState(false);
 
   return (
     <div className={`nc-AuthorPage `}>
-      <main className="mt-0 mb-0 lg:mb-0 flex flex-col lg:flex-row "
-        style={{ height: '100vh' }}
+      <main
+        className="mt-0 mb-0 lg:mb-0 flex flex-col lg:flex-row "
+        style={{ height: "100vh" }}
       >
         <div
           className="block flex-grow mb-0 lg:mb-0"
@@ -584,54 +576,55 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         >
           <div className="lg:sticky lg:top-0">{Rendersidebar()}</div>
         </div>
-        <div className="w-full lg:w-3/5 xl:w-4/5 space-y-8 lg:space-y-10 lg:pl-0 flex-shrink-0"
-          style={
-            {
-              height: '100vh',
-              padding: '3rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              alignItems: 'center'
-            }
-          }
+        <div
+          className="w-full lg:w-3/5 xl:w-4/5 space-y-8 lg:space-y-10 lg:pl-0 flex-shrink-0"
+          style={{
+            height: "100vh",
+            padding: "3rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
           {/* {renderSection1()} */}
           {/* {renderSection2()} */}
 
-
           {enter ? renderChatWithJurisAI() : renderInitialScreen()}
-          <div className="container pt-20 pb-0"
-            style={{ padding: '0' }}>
+          <div className="container pt-20 pb-0" style={{ padding: "0" }}>
             {/* > */}
             {/* {renderChatWithJurisAI()}
             {renderChatWithJurisAI()} */}
 
             {/* {renderQueryField()} */}
-            <div className="space-y-5"
-              style={{ position: 'sticky' }}
-            >
-              <div className="relative"
-                style={{ position: 'sticky', width: "90%", margin: "auto", left: "1rem" }}
+            <div className="space-y-5" style={{ position: "sticky" }}>
+              <div
+                className="relative"
+                style={{
+                  position: "sticky",
+                  width: "90%",
+                  margin: "auto",
+                  left: "1rem",
+                }}
               >
                 <Input
-
                   fontClass=""
                   sizeClass="h-16 px-4 py-3"
                   rounded="rounded-2xl"
                   placeholder="Message JurisAI"
                   value={query} // Value is set to the query state
                   onChange={onInputChange}
-
-
                 />
                 <button
                   onClick={() => setEnter(true)}
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 "
                 >
-                  <IoMdSend size={32} style={{
-                    color: 'rgba(142, 142, 160, 1)',
-                  }} />
+                  <IoMdSend
+                    size={32}
+                    style={{
+                      color: "rgba(142, 142, 160, 1)",
+                    }}
+                  />
                 </button>
               </div>
             </div>
