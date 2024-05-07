@@ -560,7 +560,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     return (
       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
         <ChatWithJurisAI
-
+          value={query}
           className="py-8" />
       </div>
     );
@@ -570,8 +570,18 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const [enter, setEnter] = useState(false)
 
 
+  const onSendButtonClick = () => {
+    setEnter(true); // Triggered when the button is clicked
+  };
+  const onInputEnter = (event) => {
+    if (event.key === 'Enter') {
+      setEnter(true);
 
 
+    } else {
+      setQuery(event.target.value);
+    }
+  };
 
   return (
     <div className={`nc-AuthorPage `}>
@@ -620,13 +630,13 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
                   sizeClass="h-16 px-4 py-3"
                   rounded="rounded-2xl"
                   placeholder="Message JurisAI"
-                  value={query} // Value is set to the query state
+                  value={query}
                   onChange={onInputChange}
-
+                  onKeyDown={onInputEnter}
 
                 />
                 <button
-                  onClick={() => setEnter(true)}
+                  onClick={onSendButtonClick}
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 "
                 >
                   <IoMdSend size={32} style={{

@@ -15,6 +15,8 @@ export interface CommentListingProps {
   className?: string;
   data?: CommentListingDataType;
   hasListingTitle?: boolean;
+
+  value?: string
 }
 
 const DEMO_DATA: CommentListingDataType = {
@@ -29,9 +31,11 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
   className = "",
   data = DEMO_DATA,
   hasListingTitle,
+  value
 
 }) => {
 
+  console.log("cahta", value)
   return (
     <>
       <div
@@ -91,7 +95,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
               height: 'auto',
             }}
           >
-            {data.query}
+            {value}
           </span>
         </div>
       </div>
