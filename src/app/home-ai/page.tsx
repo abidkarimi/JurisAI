@@ -31,6 +31,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import jwt from "jsonwebtoken";
 import Cookies from "js-cookie";
+import { url } from "inspector";
 
 export interface AuthorPageProps {
   className?: string;
@@ -377,6 +378,8 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       </div>
     );
   };
+
+
   const renderQueryField = () => {
     return (
       <div className="space-y-5" style={{ position: "sticky" }}>
@@ -389,22 +392,38 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             left: "1rem",
           }}
         >
-          <Input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            fontClass=""
-            sizeClass="h-16 px-4 py-3"
-            rounded="rounded-2xl"
-            placeholder="Message JurisAI"
-          />
-          <button className="absolute right-2 top-1/2 transform -translate-y-1/2 ">
-            <IoMdSend size={32} style={{ color: "rgba(142, 142, 160, 1)" }} />
-          </button>
+          <form onSubmit={handleFormSubmit}>
+            <Input
+              type="text"
+              value={query}
+              onChange={onInputChange}
+              onKeyDown={onInputEnter}
+              placeholder="Message JurisAI ..."
+              className="h-16 px-4 py-3 rounded-2xl"
+
+
+            />
+            <button
+              onClick={onSendButtonClick}
+              type="submit"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 "
+            >
+              <IoMdSend
+                size={32}
+                style={{
+                  color: "rgba(142, 142, 160, 1)",
+                }}
+              />
+            </button>
+
+          </form>
         </div>
       </div>
     );
   };
   const renderInitialScreen = () => {
+
+
     return (
       <div className={`nc-SectionStatistic relative ${className}`}>
         {/* <div className="p-10"></div> */}
@@ -546,11 +565,27 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   //   );
   // };
 
+
+  // const [responseFromJuris, setResponseFromJuris] = useState();  // state to stored response from model
+  // const urlForResponse = '/api/users/login';
+  // useEffect(() => {
+  //   axios.get(urlForResponse).then((response) => {
+  //     console.log(` check for response${response.data}`)
+  //   })
+  // });
+
+
   const [query, setQuery] = useState(""); // State to store the input value
+  const [responseFromJuris, setResponseFromJuris] = useState({
+    query: "",
+    response: ""
+  });  // state to stored response from model
 
   const onInputChange = (event) => {
     setQuery(event.target.value);
+
   };
+
 
   console.log("query", query);
 
@@ -567,11 +602,31 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const onSendButtonClick = () => {
     setEnter(true); // Triggered when the button is clicked
   };
-  const onInputEnter = (event) => {
+  const onInputEnter = async (event) => {
+    console.log("OnInputEnter fn ", event.target.value, event.key)
     if (event.key === "Enter") {
+      console.log("If")
       setEnter(true);
+      setResponseFromJuris("Imaginary Response - From LLMA - 3")
+      // const urlForResponse = '/api/users/login';
+      // const response = await axios.post(urlForResponse, {});
+      // const { token } = response.data; // Extract token from response
+
+      console.log("Login success");
+
     } else {
+      console.log("Else")
       setQuery(event.target.value);
+    }
+  };
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (query.trim() !== '') {
+      prompt(query);
+      // setShowDisplayChats(true);
+      renderChatWithJurisAI
+      setQuery(''); // Clear the input field
+
     }
   };
 
@@ -618,26 +673,31 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
                   left: "1rem",
                 }}
               >
-                <Input
-                  fontClass=""
-                  sizeClass="h-16 px-4 py-3"
-                  rounded="rounded-2xl"
-                  placeholder="Message JurisAI"
-                  value={query}
-                  onChange={onInputChange}
-                  onKeyDown={onInputEnter}
-                />
-                <button
-                  onClick={onSendButtonClick}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 "
-                >
-                  <IoMdSend
-                    size={32}
-                    style={{
-                      color: "rgba(142, 142, 160, 1)",
-                    }}
+                <form onSubmit={handleFormSubmit}>
+                  <Input
+                    type="text"
+                    value={query}
+                    onChange={onInputChange}
+                    onKeyDown={onInputEnter}
+                    placeholder="Message JurisAI ..."
+                    className="h-16 px-4 py-3 rounded-2xl"
+
+
                   />
-                </button>
+                  <button
+                    onClick={onSendButtonClick}
+                    type="submit"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 "
+                  >
+                    <IoMdSend
+                      size={32}
+                      style={{
+                        color: "rgba(142, 142, 160, 1)",
+                      }}
+                    />
+                  </button>
+
+                </form>
               </div>
             </div>
           </div>

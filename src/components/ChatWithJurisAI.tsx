@@ -9,6 +9,7 @@ interface CommentListingDataType {
   date: string;
   comment: string;
   starPoint: number;
+  query: string;
 }
 
 export interface CommentListingProps {
@@ -16,7 +17,8 @@ export interface CommentListingProps {
   data?: CommentListingDataType;
   hasListingTitle?: boolean;
 
-  value?: string
+  value?: string;
+
 }
 
 const DEMO_DATA: CommentListingDataType = {
@@ -95,7 +97,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
               height: 'auto',
             }}
           >
-            {value}
+            {data.query}
           </span>
         </div>
       </div>
@@ -104,7 +106,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
       {/* {the component to display response from model} */}
 
       <div
-        className={`nc-CommentListing bg-[#f5f5f9] dark:bg-[#111827] flex space-x-4 ${className}`}
+        className={`nc-CommentListing bg-[#f5f5f9] dark:bg-[#4e505c] flex space-x-4 ${className}`}
         data-nc-id="CommentListing"
         style={
           {
@@ -165,6 +167,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
               height: 'auto',
             }}
           >
+
             {data.response}
           </span>
         </div>
