@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useState, useEffect, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import Input from "@/shared/Input";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Link from "next/link";

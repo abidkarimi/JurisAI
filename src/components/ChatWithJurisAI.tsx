@@ -4,27 +4,29 @@ import { BiLike } from "react-icons/bi";
 import { BiDislike } from "react-icons/bi";
 
 interface CommentListingDataType {
-  name: string;
+  name?: string;
   avatar?: string;
-  date: string;
-  comment: string;
-  starPoint: number;
+  date?: string;
+  comment?: string;
+  starPoint?: number;
   query: string;
+  response:string;
+  id?: string;
 }
 
 export interface CommentListingProps {
   className?: string;
   data?: CommentListingDataType;
   hasListingTitle?: boolean;
-
   value?: string;
+  query?: string;
+  response?: string;
 
 }
 
 const DEMO_DATA: CommentListingDataType = {
   query: "Query from User",
-  response:
-    "Response from Model",
+  response:"Response from Model"
 
 
 };
@@ -33,11 +35,13 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
   className = "",
   data = DEMO_DATA,
   hasListingTitle,
-  value
+  value,
+  query, 
+  response
 
 }) => {
 
-  console.log("cahta", value)
+  // console.log("cahta", value)
   return (
     <>
       <div
@@ -97,7 +101,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
               height: 'auto',
             }}
           >
-            {data.query}
+            {query}
           </span>
         </div>
       </div>
@@ -168,7 +172,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
             }}
           >
 
-            {data.response}
+            {response}
           </span>
         </div>
       </div>

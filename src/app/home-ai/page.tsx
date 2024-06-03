@@ -73,6 +73,12 @@ interface DecodedToken {
   fullName?: string;
 }
 
+interface queryResponse {
+  id?: string;
+  query?: string;
+  response?: string;
+}
+
 const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
 
@@ -589,10 +595,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
 
   const [query, setQuery] = useState(""); // State to store the input value
-  const [responseFromJuris, setResponseFromJuris] = useState({
-    query: "",
-    response: ""
-  });  // state to stored response from model
+  const [responseFromJuris, setResponseFromJuris] = useState<queryResponse[]>([]);  // state to stored response from model
 
   const onInputChange = (event) => {
     setQuery(event.target.value);
@@ -600,12 +603,18 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   };
 
 
-  console.log("query", query);
+  // console.log("query", query);
 
   const renderChatWithJurisAI = () => {
     return (
       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-        <ChatWithJurisAI value={query} className="py-8" />
+        {
+          responseFromJuris.map(
+            (val, ind) => 
+              <ChatWithJurisAI query={val.query} response = {val.response} className="py-8" />
+            
+          )
+        }
       </div>
     );
   };
@@ -616,26 +625,27 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     setEnter(true); // Triggered when the button is clicked
   };
   const onInputEnter = async (event) => {
-    console.log("OnInputEnter fn ", event.target.value, event.key)
+    // console.log("OnInputEnter fn ", event.target.value, event.key)
     if (event.key === "Enter") {
       console.log("If")
+      responseFromJuris.map(ob => console.log("Qu", ob.query, " Re ", ob.query))
       setEnter(true);
-      setResponseFromJuris("Imaginary Response - From LLMA - 3")
+      setResponseFromJuris([...responseFromJuris, {query:event.target.value, response:""}])
       // const urlForResponse = '/api/users/login';
       // const response = await axios.post(urlForResponse, {});
       // const { token } = response.data; // Extract token from response
 
-      console.log("Login success");
+      // console.log("Login success");
 
     } else {
-      console.log("Else")
+      // console.log("Else")
       setQuery(event.target.value);
     }
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (query.trim() !== '') {
-      prompt(query);
+      // prompt("promptong",query);
       // setShowDisplayChats(true);
       renderChatWithJurisAI
       setQuery(''); // Clear the input field
