@@ -43,8 +43,16 @@ const userSchema = new Schema({
     type: String,
     default: "free",
   },
-  subscriptionStartDate: Date,
-  subscriptionEndDate: Date,
+  subscriptionStartDate: {
+    type: Date,
+    default: Date.now,
+  },
+  subscriptionEndDate: {
+    type: Date,
+    default: function () {
+      return new Date(Date.now() + 3 * 24 * 60 * 60 * 1000); // 3 days from now
+    },
+  },
   queries: [
     {
       question: {
@@ -62,6 +70,17 @@ const userSchema = new Schema({
     },
   ],
 });
+// userSchema.pre("save", function (next) {
+//   if (!this.subscriptionStartDate) {
+//     this.subscriptionStartDate = new Date();
+//   }
+
+//   // Calculate the end date by adding 3 days to the start date
+//   this.subscriptionEndDate = new Date(this.subscriptionStartDate);
+//   this.subscriptionEndDate.setDate(this.subscriptionEndDate.getDate() + 3);
+
+//   next();
+// });
 
 const User = mongoose.models.user || mongoose.model("user", userSchema);
 

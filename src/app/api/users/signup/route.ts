@@ -9,7 +9,7 @@ connect()
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { fullName, email, password, lawFirm, areaOfPractice, subscriptionType } = reqBody;
+        const { fullName, email, password, lawFirm, areaOfPractice} = reqBody;
 
         // Check if user already exists
         const existingUser = await User.findOne({ email });
@@ -29,9 +29,9 @@ export async function POST(request: NextRequest) {
             password: hashedPassword,
             lawFirm,
             areaOfPractice,
-            subscriptionType, // Set subscription type here
-            subscriptionStartDate: subscriptionType === "trial" ? new Date() : undefined, // Set start date based on subscription type
-            subscriptionEndDate: subscriptionType === "trial" ? new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) : undefined, // Set end date for trial subscription (3 days)
+            subscriptionType: "free", // Set subscription type to "free" by default
+            subscriptionStartDate: new Date(), // Set start date to current date
+            subscriptionEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // Set end date for trial subscription (3 days)
         });
 
         // Save the new user
