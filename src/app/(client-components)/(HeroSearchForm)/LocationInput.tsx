@@ -3,8 +3,8 @@
 import { ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import React, { useState, useRef, useEffect, FC } from "react";
 import ClearDataButton from "./ClearDataButton";
-// import GoogleAPIs from "@/shared/GoogleAPIs";
-// import axios from "axios";
+import GoogleAPIs from "@/shared/GoogleAPIs";
+import axios from "axios";
 
 export interface LocationInputProps {
   placeHolder?: string;

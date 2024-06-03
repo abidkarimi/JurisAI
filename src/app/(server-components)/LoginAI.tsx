@@ -1,18 +1,35 @@
-import React, { FC } from "react";
+
+import React, { FC, useEffect } from "react";
 import HeroRealEstateSearchForm from "../(client-components)/(HeroSearchForm)/(real-estate-search-form)/HeroRealEstateSearchForm";
 import Input from "@/shared/Input";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Link from "next/link";
 import PageLogin from "../login/page";
 import Logo from "@/shared/Logo";
+import axios from "axios";
 
 export interface SectionHero2ArchivePageProps {
   className?: string;
 }
 
-const LoginAI: FC<SectionHero2ArchivePageProps> = ({
+const LoginAI: FC<SectionHero2ArchivePageProps> =  ({
   className = "",
 }) => {
+  console.log("Hellow world11")
+  const response =  "Testq"
+  // axios.get('/api/places', {
+  //   params: { input: 'value',
+  //             type: 'test'
+  //   },
+  // })
+  console.log("Responded ", response)
+  // .then(( res ) => {
+  //   console.log("Inside loginAI then", res)
+
+  // }).catch(( err ) => {
+  //   console.log("Inside loginAI catch", err)
+
+  // });
   return (
     <div
       className={`nc-SectionHero2ArchivePage relative ${className} pt-10`}
@@ -36,7 +53,7 @@ const LoginAI: FC<SectionHero2ArchivePageProps> = ({
           <form className="grid grid-cols-1 gap-6 pt-6 pb-20" action="#" method="post">
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
-                Email LAI
+                Email LA
               </span>
               <Input
                 type="email"

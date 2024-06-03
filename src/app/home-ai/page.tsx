@@ -22,6 +22,7 @@ import Input from "@/shared/Input";
 import { ArrowRightIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import LeftPanelFooter from "@/shared/LeftPanelFooter";
 import ChatWithJurisAI from "@/components/ChatWithJurisAI";
+import axios from "axios";
 
 
 export interface AuthorPageProps {
@@ -220,6 +221,21 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       </div>
     );
   };
+  const [message, setMessage] = useState("");
+
+  const handleMessageChange = (e:any) => {
+    console.log("changing ", e.target.value)
+    setMessage(e.target.value);
+  };
+
+  const handleButtonClick = async () => {
+    console.log("Message: How much money did VCs put", message);
+    const response = await axios.get('/api/places', {
+      params: { input: message },
+    });
+    console.log("Responsea:", response.data);
+    // Do something with the message value here
+  };
   const renderQueryField = () => {
     
       return(
@@ -230,10 +246,14 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             sizeClass="h-16 px-4 py-3"
             rounded="rounded-3xl"
             placeholder="Message JurisAI"
+            onChange={handleMessageChange}
+
           />
           <ButtonCircle
             className="absolute right-2 top-1/2 transform -translate-y-1/2"
             size=" w-12 h-12 "
+            onClick={handleButtonClick}
+
           >
             <ArrowRightIcon className="w-5 h-5" />
           </ButtonCircle>
@@ -251,7 +271,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         </div>
       <Heading
         desc=""
-        isCenter = 'true'
+        isCenter = 'false'
       >
         Welcome to JurisAI
       </Heading>
@@ -388,6 +408,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   };
 
   const renderChatWithJurisAI = ( ) => {
+    API("Asdf")
     return(
       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
         <ChatWithJurisAI className="py-8" />
@@ -395,6 +416,20 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     )
   }
 
+  const API = async (query: any) => {
+    // const value = query.target.value;
+    console.log("Handle Searchaa API", query)
+
+    // try {
+      const response = await axios.get('/api/places', {
+        params: { input: query },
+      });
+      console.log("Responsea:", response.data);
+      // Handle response data here
+    // } catch (error) {
+    //   console.error(error);
+    // }
+  }
   return (
     <div className={`nc-AuthorPage `}>
       <main className="mt-0 mb-0 lg:mb-0 flex flex-col lg:flex-row">
@@ -408,6 +443,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           <div className="container pt-20 pb-0">
             {renderChatWithJurisAI()}
             {renderChatWithJurisAI()}
+            {/* {API("kh")} */}
 
           {renderQueryField()}
 
