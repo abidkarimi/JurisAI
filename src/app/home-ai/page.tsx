@@ -391,14 +391,6 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     setMessage(e.target.value);
   };
 
-  const handleButtonClick = async () => {
-    console.log("Message: How much money did VCs put", message);
-    const response = await axios.get('/api/places', {
-      params: { input: message },
-    });
-    console.log("Responsea:", response.data);
-    // Do something with the message value here
-  };
   const renderQueryField = () => {
     return (
       <div className="space-y-5" style={{ position: "sticky" }}>
@@ -606,8 +598,9 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   // console.log("query", query);
 
   const renderChatWithJurisAI = () => {
+    handleButtonClick()
     return (
-      <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+      <div className="divide-y divide-neutral-100 dark:divide-neutral-800 overflow-y: auto">
         {
           responseFromJuris.map(
             (val, ind) => 
@@ -619,6 +612,16 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     );
   };
 
+  
+  const handleButtonClick = async () => {
+    // console.log("Message: How much money did VCs put juris1", message);
+    // const response = await axios.get('/api/places', {
+    //   params: { input: message },
+    // });
+    // console.log("Responsea:", response.data);
+    // Do something with the message value here
+  };
+
   const [enter, setEnter] = useState(false);
 
   const onSendButtonClick = () => {
@@ -627,10 +630,15 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const onInputEnter = async (event) => {
     // console.log("OnInputEnter fn ", event.target.value, event.key)
     if (event.key === "Enter") {
-      console.log("If")
-      responseFromJuris.map(ob => console.log("Qu", ob.query, " Re ", ob.query))
+      console.log("Message: How much money did VCs put juris",  event.target.value );
+      const response = await axios.get('/api/places', {
+        params: { input: event.target.value },
+      });
+      console.log("Response only ", response)
+      console.log("Responsea data:", response.data);
+      // responseFromJuris.map(ob => console.log("Qu", ob.query, " Re ", ob.query))
       setEnter(true);
-      setResponseFromJuris([...responseFromJuris, {query:event.target.value, response:""}])
+      setResponseFromJuris([...responseFromJuris, {query:event.target.value, response:response.data}])
       // const urlForResponse = '/api/users/login';
       // const response = await axios.post(urlForResponse, {});
       // const { token } = response.data; // Extract token from response

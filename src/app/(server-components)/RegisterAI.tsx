@@ -183,10 +183,12 @@ const RegisterAI: FC<RegisterAIProps> = ({ className = "" }) => {
           backgroundColor: "rgba(255, 255, 255, 0.5)",
         }}
       >
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center pt-6">
           <Logo />
         </div>
-        <div className="max-w-md mx-auto p-3 sm:p-6">
+        
+        <div className="max-w-md mx-auto sm:p-6">
+        <h1 style={{fontSize: "25px", fontWeight: "600"}}>Register</h1>
           <form onSubmit={handleSubmit} className="space-y-2">
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">

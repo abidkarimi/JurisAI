@@ -89,15 +89,16 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </label>
-            <label className="block">
+            <label className="block pb-6">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Password
               </span>
-              <div className="relative">
+              <div className="relative ">
                 <Input
                   type={showPassword ? "text" : "password"}
                   className="mt-1 pr-10"
                   value={user.password}
+                  placeholder="Passsword"
                   onChange={(e) =>
                     setUser({ ...user, password: e.target.value })
                   }
@@ -156,7 +157,7 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
               Log In
             </ButtonPrimary>
           </form>
-          <div className="text-center mt-4">
+          <div className="text-center mt-20 pt-10">
             <span className="text-neutral-800 dark:text-neutral-200">
               Don&apos;t have an account yet?
             </span>
