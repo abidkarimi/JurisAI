@@ -197,7 +197,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             >
               <GoSync color={"white"} size={20} />
 
-              <p className="px-3">Premmium Plan</p>
+              <p className="px-3">Premium Plan</p>
             </button>
             <LeftPanelFooter
               onLogout={handleLogout}
@@ -239,27 +239,29 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
                       <PageSubcription
                         pricings={[
                           {
-                            isPopular: false,
+
                             name: "Free",
-                            pricing: "€0 ",
-                            per: "/mo",
+                            // pricing: "€0 ",
+                            // per: "/mo",
                             desc: ` “Welcome to JurisAI! Please note that we currently offer one three-day free trial per law firm. After the trial period ends, access to JurisAI will require a paid subscription. Thank you for choosing JurisAI”`,
-                            features: [
-                              "Automated Reporting",
-                              "Faster Processing",
-                              "Customizations",
-                            ],
+                            // features: [
+                            //   "Automated Reporting",
+                            //   "Faster Processing",
+                            //   "Customizations",
+                            // ],
                           },
                           {
-                            isPopular: false,
+
                             name: "Basic",
                             pricing: "€200",
                             per: "/mo",
                             features: [
+                              "Latest access to practical guidance on every element of the pre-action protocols, CPR, and Practice Direction.",
+                              "Full access to our premium content library, with a heavy focus on practitioner texts.",
                               "Exclusive features and updates.",
-                              "Priority customer support.",
                               "Regular newsletters and insights.",
                               "No Contact – Cancel Anytime.",
+
                             ],
                             desc: ` “We are looking to introduce further subscription plans in the near future. However, currently, this service has been specifically designed for the use of law firms specialising in the civil litigation area of law. 
                           
@@ -386,7 +388,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   };
   const [message, setMessage] = useState("");
 
-  const handleMessageChange = (e:any) => {
+  const handleMessageChange = (e: any) => {
     console.log("changing ", e.target.value)
     setMessage(e.target.value);
   };
@@ -603,16 +605,16 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       <div className="divide-y divide-neutral-100 dark:divide-neutral-800 overflow-y: auto">
         {
           responseFromJuris.map(
-            (val, ind) => 
-              <ChatWithJurisAI query={val.query} response = {val.response} className="py-8" />
-            
+            (val, ind) =>
+              <ChatWithJurisAI query={val.query} response={val.response} className="py-8" />
+
           )
         }
       </div>
     );
   };
 
-  
+
   const handleButtonClick = async () => {
     // console.log("Message: How much money did VCs put juris1", message);
     // const response = await axios.get('/api/places', {
@@ -630,7 +632,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const onInputEnter = async (event) => {
     // console.log("OnInputEnter fn ", event.target.value, event.key)
     if (event.key === "Enter") {
-      console.log("Message: How much money did VCs put juris",  event.target.value );
+      console.log("Message: How much money did VCs put juris", event.target.value);
       const response = await axios.get('/api/places', {
         params: { input: event.target.value },
       });
@@ -638,7 +640,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       console.log("Responsea data:", response.data);
       // responseFromJuris.map(ob => console.log("Qu", ob.query, " Re ", ob.query))
       setEnter(true);
-      setResponseFromJuris([...responseFromJuris, {query:event.target.value, response:response.data}])
+      setResponseFromJuris([...responseFromJuris, { query: event.target.value, response: response.data }])
       // const urlForResponse = '/api/users/login';
       // const response = await axios.post(urlForResponse, {});
       // const { token } = response.data; // Extract token from response
@@ -666,11 +668,11 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     console.log("Handle Searchaa API", query)
 
     // try {
-      const response = await axios.get('/api/places', {
-        params: { input: query },
-      });
-      console.log("Responsea:", response.data);
-      // Handle response data here
+    const response = await axios.get('/api/places', {
+      params: { input: query },
+    });
+    console.log("Responsea:", response.data);
+    // Handle response data here
     // } catch (error) {
     //   console.error(error);
     // }
