@@ -19,14 +19,14 @@ const pricings: PricingItem[] = [
   {
 
     name: "Free",
-    pricing: "€0 ",
+    pricing: "£0 ",
     per: "/mo",
     desc: ` “Welcome to JurisAI! Please note that we currently offer one three-day free trial per law firm. After the trial period ends, access to JurisAI will require a paid subscription. Thank you for choosing JurisAI”`,
 
   },
   {
 
-    name: "€200",
+    name: "£200",
     // pricing: "€200",
     per: "/mo",
     features: [
@@ -131,15 +131,24 @@ const PageSubscription: FC<PageSubcriptionProps> = ({ pricings }) => {
               key={index}
             >
 
-              <span className="mr-4 inline-flex flex-shrink-0 text-primary-6000">
-                <CheckIcon className="w-5 h-5" aria-hidden="true" />
+              <span className="mr-4 inline-flex flex-shrink-0 text-primary-6000"
+                style={{
+                  width: ' 1.5rem',
+                  height: '1.5rem',
+                  border: 'solid 2px black',
+                  borderRadius: '12px',
+                  backgroundColor: '#000'
+
+                }}
+              >
+                <CheckIcon className="w-5 h-5 text-[#fff]" aria-hidden="true" />
               </span>
-              <span className=" dark:text-white"
+              <span className=" dark:text-neutral-300"
                 style={{
                   fontSize: '13px',
                   fontWeight: '600',
                   color: 'rgba(0, 0, 0, 1)',
-                  lineHeight: '15.4px'
+                  lineHeight: '12.4px'
                 }}
               >
                 {item}
@@ -155,13 +164,13 @@ const PageSubscription: FC<PageSubcriptionProps> = ({ pricings }) => {
             alignItems: 'center'
           }}
         >
-          <p className="text-xs text-neutral-500 dark:text-neutral-300 mt-3"
+          <p className="text-xs  dark:text-[#FFFFFF] mt-3"
             style={{
               fontWeight: '300',
-              // fontSize: '22px',
-              // color: 'rgba(0, 0, 0, 1)',
+              fontSize: '14px',
+              color: 'rgba(0, 0, 0, 1)',
               textAlign: 'center',
-              // lineHeight: '26.07px'
+              lineHeight: '16.07px'
             }}
           >
             {pricing.desc}
@@ -176,6 +185,7 @@ const PageSubscription: FC<PageSubcriptionProps> = ({ pricings }) => {
                 width: '141.75px',
                 borderRadius: '14px',
                 color: ' white',
+                marginTop: '7px'
               }}
             >
               <span className="font-medium dark:text-neutral-300 dark:hover:text-white">
@@ -192,6 +202,7 @@ const PageSubscription: FC<PageSubcriptionProps> = ({ pricings }) => {
                 width: '141.75px',
                 borderRadius: '14px',
                 color: ' white',
+                marginTop: '7px'
               }}
             >
               <span className="font-medium dark:text-neutral-300 dark:hover:text-white">
@@ -209,7 +220,7 @@ const PageSubscription: FC<PageSubcriptionProps> = ({ pricings }) => {
       className={`nc-PageSubscription container pb-24 lg:pb-32 bg-transparent`}
     >
       <section className="text-neutral-600  text-sm md:text-base overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-5 xl:gap-8 ">
+        <div className="grid lg:grid-cols-2 gap-5 xl:gap-8">
           {pricings.map(renderPricingItem)}
         </div>
       </section>

@@ -235,7 +235,11 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                   >
-                    <Dialog.Panel className="w-full max-w-5xl transform overflow-hidden   bg-transparent p-6 text-left align-middle transition-all h-[82vh]">
+                    <Dialog.Panel className="w-full max-w-5xl transform overflow-hidden   bg-transparent p-6 text-left align-middle transition-all h-[82vh]"
+                      style={{
+                        height: '100vh'
+                      }}
+                    >
                       <PageSubcription
                         pricings={[
                           {
@@ -253,7 +257,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
                           {
 
                             name: "Basic",
-                            pricing: "€200",
+                            pricing: "£200",
                             per: "/mo",
                             features: [
                               "Latest access to practical guidance on every element of the pre-action protocols, CPR, and Practice Direction.",
