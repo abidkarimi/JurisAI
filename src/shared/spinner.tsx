@@ -22,7 +22,7 @@ export interface ButtonProps {
   onlyRoler?:boolean;
 }
 
-const Button: FC<ButtonProps> = ({
+const Spinner: FC<ButtonProps> = ({
   className = "text-neutral-700 dark:text-neutral-200",
   translate = "",
   sizeClass = "px-2 py-3 sm:px-4",
@@ -79,17 +79,10 @@ const Button: FC<ButtonProps> = ({
   }
 
   return (
-    <button
-      disabled={disabled || loading}
-      className={`${CLASSES}`}
-      onClick={onClick}
-      type={type}
-      style={{ backgroundColor: '#f25019' }}
-    >
+    <span>{loading}
       {loading && _renderLoading()}
-      {!onlyRoler && (children || `This is Button`)}
-    </button>
+      </span>
   );
 };
 
-export default Button;
+export default Spinner;

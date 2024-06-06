@@ -96,9 +96,12 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const fullName = decodedToken?.fullName;
 
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
+  const [loading, setLoading] = React.useState(false);
+  const [loadingLogout, setloadingLogout] = React.useState(false);
 
   const handleLogout = async () => {
     try {
+      setloadingLogout(true);
       await axios.get("/api/users/logout");
       localStorage.removeItem("token"); // Remove token
       localStorage.clear();
@@ -107,6 +110,9 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     } catch (error: any) {
       console.error(error.message);
       toast.error("Failed to logout");
+    }
+   finally {
+      setloadingLogout(false);
     }
   };
 
@@ -202,6 +208,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             <LeftPanelFooter
               onLogout={handleLogout}
               className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start gap-4"
+              loading = {loadingLogout?true:false}
             />
           </div>
           <Transition appear show={isOpen} as={Fragment}>
@@ -600,11 +607,11 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const renderChatWithJurisAI = () => {
     handleButtonClick()
     return (
-      <div className="divide-y divide-neutral-100 dark:divide-neutral-800 overflow-y: auto">
+      <div className="divide-y divide-neutral-100 dark:divide-neutral-800 " style={{overflow: "auto"}}>
         {
           responseFromJuris.map(
             (val, ind) => 
-              <ChatWithJurisAI query={val.query} response = {val.response} className="py-8" />
+              <ChatWithJurisAI query={val.query} response = {val.response} className="py-8" loading = {loading?true:false}/>
             
           )
         }
@@ -628,17 +635,30 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     setEnter(true); // Triggered when the button is clicked
   };
   const onInputEnter = async (event) => {
-    // console.log("OnInputEnter fn ", event.target.value, event.key)
+    console.log("OnInputEnter fn ", event.target.value, event.key)
     if (event.key === "Enter") {
       console.log("Message: How much money did VCs put juris",  event.target.value );
-      const response = await axios.get('/api/places', {
-        params: { input: event.target.value },
-      });
-      console.log("Response only ", response)
-      console.log("Responsea data:", response.data);
-      // responseFromJuris.map(ob => console.log("Qu", ob.query, " Re ", ob.query))
+      let response:any = ""
+      try {      
+        setLoading(true);
+        setResponseFromJuris([...responseFromJuris, {query:query, response:'loading'}])
+
+      response = await axios.get('/api/places', {
+                                    params: { input: event.target.value },
+                                  });
+      } catch (error: any) {
+        console.log("invalid credentials");
+        toast.error(error.message);
+      }
+      finally {
+        setLoading(false);
+      }
+
+      // console.log("Revent.target.value", event.target.value)
+      // console.log("responseFromJuris", responseFromJuris , " query query ", query);
+      // responseFromJuris.map(ob => console.log("Question and answers", ob.query, " Re ", ob.response))
       setEnter(true);
-      setResponseFromJuris([...responseFromJuris, {query:event.target.value, response:response.data}])
+      setResponseFromJuris([...responseFromJuris, {query:query, response:response.data}])
       // const urlForResponse = '/api/users/login';
       // const response = await axios.post(urlForResponse, {});
       // const { token } = response.data; // Extract token from response
