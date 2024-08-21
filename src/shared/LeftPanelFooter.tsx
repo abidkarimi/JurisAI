@@ -1,10 +1,12 @@
 import React, { FC, useState, useEffect,Fragment } from "react";
 import { SocialType } from "@/shared/SocialsShare";
 import { Dialog, Transition } from '@headlessui/react'
+import ButtonPrimary from "@/shared/ButtonPrimary";
 
 export interface SocialsList1Props {
   className?: string;
   onLogout: () => void; // Callback function for logout
+  loading?:boolean 
 }
 
 const socials: SocialType[] = [
@@ -18,9 +20,11 @@ const socials: SocialType[] = [
 const LeftPanelFooter: FC<SocialsList1Props> = ({
   className = "space-y-2.5",
   onLogout,
+  loading = false
 }) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
- 
+  const [loadinglogout, setloadinglogout] = React.useState(false);
+
 
 
   // State variable to track whether the premium component is visible or not
@@ -39,7 +43,7 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);
-
+  console.log("Loading value ", loading, " loadinglogout ", loadinglogout)
   return (
     <>
     <div className={`nc-SocialsList1 ${className}`} data-nc-id="SocialsList1">
@@ -47,14 +51,15 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({
       {socials.map((item, index) => {
         if (item.name === "Logout") {
           return (
-            <button
+            <ButtonPrimary
+              loading  = {loading?true:false}
               key={index}
               onClick={onLogout} // Call the onLogout prop when Logout button is clicked
               className="flex items-center text-2xl text-white hover:text-neutral-300 dark:text-neutral-300 dark:hover:text-white leading-none space-x-2 group"
             >
               <i className={item.icon}></i>
               <span className="hidden lg:block text-sm">{item.name}</span>
-            </button>
+            </ButtonPrimary>
           );
         } else if (item.name === "Dark mode") {
           return (

@@ -43,7 +43,7 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
       toast.success("Login successful");
       router.push("/home-ai");
     } catch (error: any) {
-      console.log("Login failed", error.message);
+      // console.log("Login failed", error.message);
       console.log("invalid credentials");
       toast.error(error.message);
       setLoginError("Invalid email or password.");
@@ -62,7 +62,7 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
 
   return (
     <div
-      className={`nc-SectionHero2ArchivePage relative ${className} pt-10`}
+      className={`nc-SectionHero2ArchivePage relative ${className} pt-8`}
       data-nc-id="SectionHero2ArchivePage"
     >
       <div
@@ -153,6 +153,7 @@ const LoginAI: FC<LoginAIProps> = ({ className = "" }) => {
               className="w-full"
               onClick={onLogin}
               disabled={loading}
+              loading = {loading?true:false}
             >
               Log In
             </ButtonPrimary>

@@ -2,6 +2,10 @@ import React, { FC } from "react";
 import Avatar from "@/shared/Avatar";
 import { BiLike } from "react-icons/bi";
 import { BiDislike } from "react-icons/bi";
+import chatUurIsAiLogo from "@/images/avatars/chat-juris-ai-logo.png";
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import Button, { ButtonProps } from "@/shared/Button";
+import Spinner from '@/shared/spinner'
 
 interface CommentListingDataType {
   name?: string;
@@ -12,6 +16,8 @@ interface CommentListingDataType {
   query: string;
   response:string;
   id?: string;
+  loading?: boolean;
+
 }
 
 export interface CommentListingProps {
@@ -21,6 +27,7 @@ export interface CommentListingProps {
   value?: string;
   query?: string;
   response?: string;
+  loading?: boolean;
 
 }
 
@@ -37,7 +44,8 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
   hasListingTitle,
   value,
   query, 
-  response
+  response,
+  loading
 
 }) => {
 
@@ -81,6 +89,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
               {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
               {data.date}
             </span> */}
+              {query}
             </div>
             <div className="flex"
               style={
@@ -101,7 +110,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
               height: 'auto',
             }}
           >
-            {query}
+          
           </span>
         </div>
       </div>
@@ -128,12 +137,13 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
             sizeClass="h-10 w-10 text-lg"
             radius="rounded-full"
             userName={data.name}
-            imgUrl={data.avatar}
+            imgUrl={chatUurIsAiLogo}
           />
         </div>
         <div className="flex-grow">
           <div className="flex justify-between space-x-3">
             <div className="flex flex-col">
+            {response == 'loading'? <Spinner loading  = {loading?true:false}/> :response}
               {/* No need of name so commenting */}
               {/* <div className="text-sm font-semibold">
               <span>{data.name}</span>
@@ -172,7 +182,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
             }}
           >
 
-            {response}
+           
           </span>
         </div>
       </div>

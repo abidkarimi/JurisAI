@@ -147,7 +147,7 @@ const PageSubscription: FC<PageSubcriptionProps> = ({ pricings }) => {
           </p>
           {pricing.name === "Free" ? (
             <ButtonPrimary onClick={() => subscribe("free")} disabled={loading}>
-              Trail
+              Trial
             </ButtonPrimary>
           ) : (
             <ButtonSecondary

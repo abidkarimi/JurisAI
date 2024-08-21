@@ -1,6 +1,8 @@
 import { avatarColors } from "@/contains/contants";
 import React, { FC } from "react";
 import avatar1 from "@/images/avatars/Image-1.png";
+import chatUurIsAiLogo from "@/images/avatars/chat-juris-ai-logo.png";
+
 import Image, { StaticImageData } from "next/image";
 
 export interface AvatarProps {
