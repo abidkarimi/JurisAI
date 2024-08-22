@@ -1,7 +1,7 @@
-import BackgroundSection from "@/components/BackgroundSection";
-import SectionGridAuthorBox from "@/components/SectionGridAuthorBox";
-import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
+// import BackgroundSection from "@/components/BackgroundSection";
+// import SectionGridAuthorBox from "@/components/SectionGridAuthorBox";
+// import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
+// import SectionSubscribe2 from "@/components/SectionSubscribe2";
 import React, { ReactNode } from "react";
 import imagePngBG from "@/images/giammarco-boscaro-zeH-ljawHtg-unsplash 1.png";
 import Image from "next/image";

@@ -43,7 +43,7 @@ const LeftPanelFooter: FC<SocialsList1Props> = ({
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);
-  console.log("Loading value ", loading, " loadinglogout ", loadinglogout)
+  console.log("Loading value 11a", loading, " loadinglogout ", loadinglogout)
   return (
     <>
     <div className={`nc-SocialsList1 ${className}`} data-nc-id="SocialsList1">

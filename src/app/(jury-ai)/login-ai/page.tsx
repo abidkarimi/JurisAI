@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import SectionGridFilterCard from "../SectionGridFilterCard";
 import LoginAI from "../../(server-components)/LoginAI";
 export interface ListingRealEstatePageProps {}
 

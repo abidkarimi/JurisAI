@@ -5,8 +5,8 @@ import "./globals.css";
 import "@/fonts/line-awesome-1.3.0/css/line-awesome.css";
 import "@/styles/index.scss";
 import "rc-slider/assets/index.css";
-import Footer from "@/components/Footer";
-import FooterNav from "@/components/FooterNav";
+// import Footer from "@/components/Footer";
+// import FooterNav from "@/components/FooterNav";
 import { Metadata } from "next";
 
 const poppins = Poppins({

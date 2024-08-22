@@ -1,25 +1,21 @@
 # Dockerfile for React Next.js App
 
-# Use an official Node.js image as the base
 FROM node:18-alpine
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
 COPY . .
 
-# Build the Next.js app
-RUN npm run build
+# Default to production
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 
-# Expose the port that the app will run on
+# Expose the port
 EXPOSE 3000
 
-# Start the application
-CMD ["npm", "start"]
+# Use npm run dev if in development, otherwise npm start
+CMD ["sh", "-c", "npm run ${NODE_ENV}"]

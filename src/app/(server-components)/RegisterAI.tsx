@@ -115,6 +115,7 @@ interface RegisterAIProps {
 }
 
 const RegisterAI: FC<RegisterAIProps> = ({ className = "" }) => {
+  console.log("Registraion awalala wer")
   const router = useRouter();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -131,6 +132,7 @@ const RegisterAI: FC<RegisterAIProps> = ({ className = "" }) => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    console.log("Handle Submi", formData)
     event.preventDefault();
     setLoading(true);
 

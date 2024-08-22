@@ -1,0 +1,21 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+# Print the working directory and its contents to verify everything is in place
+RUN pwd && ls -la
+
+# Build the Next.js app with verbose output for debugging
+RUN npm run build --loglevel verbose
+
+# Print the contents of the .next directory after build
+RUN ls -la .next
+
+# Start the Next.js app
+CMD ["npm", "start"]
