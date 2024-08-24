@@ -1,18 +1,18 @@
 "use client";
 
-import { Tab } from "@headlessui/react";
-import CarCard from "@/components/CarCard";
-import CommentListing from "@/components/CommentListing";
-import ExperiencesCard from "@/components/ExperiencesCard";
-import StartRating from "@/components/StartRating";
-import StayCard from "@/components/StayCard2";
+// import { Tab } from "@headlessui/react";
+// import CarCard from "@/components/CarCard";
+// import CommentListing from "@/components/CommentListing";
+// import ExperiencesCard from "@/components/ExperiencesCard";
+// import StartRating from "@/components/StartRating";
+// import StayCard from "@/components/StayCard2";
 import { GoSync } from "react-icons/go";
 import { IoSyncSharp } from "react-icons/io5";
-import {
-  DEMO_CAR_LISTINGS,
-  DEMO_EXPERIENCES_LISTINGS,
-  DEMO_STAY_LISTINGS,
-} from "@/data/listings";
+// import {
+//   DEMO_CAR_LISTINGS,
+//   DEMO_EXPERIENCES_LISTINGS,
+//   DEMO_STAY_LISTINGS,
+// } from "@/data/listings";
 import React, { FC, Fragment, useState, useEffect } from "react";
 import Avatar from "@/shared/Avatar";
 import ButtonSecondary from "@/shared/ButtonSecondary";
@@ -596,7 +596,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const [query, setQuery] = useState(""); // State to store the input value
   const [responseFromJuris, setResponseFromJuris] = useState<queryResponse[]>([]);  // state to stored response from model
 
-  const onInputChange = (event) => {
+  const onInputChange = (event:any) => {
     setQuery(event.target.value);
 
   };
@@ -611,7 +611,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         {
           responseFromJuris.map(
             (val, ind) => 
-              <ChatWithJurisAI query={val.query} response = {val.response} className="py-8" loading = {loading?true:false}/>
+              <ChatWithJurisAI key={ind} query={val.query} response = {val.response} className="py-8" loading = {loading?true:false}/>
             
           )
         }
@@ -634,8 +634,8 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const onSendButtonClick = () => {
     setEnter(true); // Triggered when the button is clicked
   };
-  const onInputEnter = async (event) => {
-    console.log("OnInputEnter fn ", event.target.value, event.key)
+  const onInputEnter = async (event:any) => {
+    console.log("OnInputEnter fn 12", event.target.value, event.key)
     if (event.key === "Enter") {
       console.log("Message: How much money did VCs put juris",  event.target.value );
       let response:any = ""
@@ -646,6 +646,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       response = await axios.get('/api/places', {
                                     params: { input: event.target.value },
                                   });
+      console.log("Response recienved from RAG ", response.data.generate_answer)
       } catch (error: any) {
         console.log("invalid credentials");
         toast.error(error.message);
@@ -658,7 +659,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       // console.log("responseFromJuris", responseFromJuris , " query query ", query);
       // responseFromJuris.map(ob => console.log("Question and answers", ob.query, " Re ", ob.response))
       setEnter(true);
-      setResponseFromJuris([...responseFromJuris, {query:query, response:response.data}])
+      setResponseFromJuris([...responseFromJuris, {query:query, response:response.data.generate_answer}])
       // const urlForResponse = '/api/users/login';
       // const response = await axios.post(urlForResponse, {});
       // const { token } = response.data; // Extract token from response
@@ -670,12 +671,13 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       setQuery(event.target.value);
     }
   };
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e:any) => {
+    console.log("Hellow 1")
     e.preventDefault();
     if (query.trim() !== '') {
       // prompt("promptong",query);
       // setShowDisplayChats(true);
-      renderChatWithJurisAI
+      renderChatWithJurisAI()
       setQuery(''); // Clear the input field
 
     }

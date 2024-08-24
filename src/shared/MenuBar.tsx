@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { Transition, Dialog } from "@headlessui/react";
-import NavMobile from "./Navigation/NavMobile";
+// import NavMobile from "./Navigation/NavMobile";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 
@@ -54,7 +54,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
                 leaveTo="opacity-0 translate-x-56"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden transition-all ">
-                  <NavMobile onClickClose={handleCloseMenu} />
+                  {/* <NavMobile onClickClose={handleCloseMenu} /> */}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
