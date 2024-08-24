@@ -635,7 +635,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     setEnter(true); // Triggered when the button is clicked
   };
   const onInputEnter = async (event:any) => {
-    console.log("OnInputEnter fn ", event.target.value, event.key)
+    console.log("OnInputEnter fn 12", event.target.value, event.key)
     if (event.key === "Enter") {
       console.log("Message: How much money did VCs put juris",  event.target.value );
       let response:any = ""
@@ -646,6 +646,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       response = await axios.get('/api/places', {
                                     params: { input: event.target.value },
                                   });
+      console.log("Response recienved from RAG ", response.data.generate_answer)
       } catch (error: any) {
         console.log("invalid credentials");
         toast.error(error.message);
@@ -658,7 +659,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       // console.log("responseFromJuris", responseFromJuris , " query query ", query);
       // responseFromJuris.map(ob => console.log("Question and answers", ob.query, " Re ", ob.response))
       setEnter(true);
-      setResponseFromJuris([...responseFromJuris, {query:query, response:response.data}])
+      setResponseFromJuris([...responseFromJuris, {query:query, response:response.data.generate_answer}])
       // const urlForResponse = '/api/users/login';
       // const response = await axios.post(urlForResponse, {});
       // const { token } = response.data; // Extract token from response
@@ -671,7 +672,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     }
   };
   const handleFormSubmit = (e:any) => {
-    console.log("Hellow ")
+    console.log("Hellow 1")
     e.preventDefault();
     if (query.trim() !== '') {
       // prompt("promptong",query);

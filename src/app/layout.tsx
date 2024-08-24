@@ -16,9 +16,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Chisfis - Booking online React Next Template",
-  description: "Booking online & rental online React Next Template",
-  keywords: "Chisfis, Booking online, React Next Template",
+  title: "JurisAI",
+  description: "US Constitution",
+  keywords: "JurisAI, your first AI based Laywer",
   viewport:
     "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
 };
