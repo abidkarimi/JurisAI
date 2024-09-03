@@ -53,12 +53,13 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
   return (
     <>
       <div
-        className={`nc-CommentListing flex space-x-4 ${className}`}
+        className={`nc-CommentListing flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 ${className}`}
         data-nc-id="CommentListing"
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "space-between",
+          fontSize:'14px'
         }}
       >
         {/* This image of either Querier or Response from JurisAI */}
@@ -119,7 +120,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
       {/* {the component to display response from model} */}
 
       <div
-        className={`nc-CommentListing bg-[#f5f5f9] dark:bg-[#4e505c] flex space-x-4 ${className}`}
+        className={`nc-CommentListing bg-[#f5f5f9] dark:bg-[#4e505c] flex space-x-4  rounded-2xl ${className}`}
         data-nc-id="CommentListing"
         style={
           {
@@ -127,7 +128,7 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
             paddingRight: '10px',
             display: 'flex',
             justifyContent: 'flex-start',
-            alignItems: 'center'
+            alignItems: 'center',
           }
         }
       >
