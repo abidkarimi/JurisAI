@@ -1,3 +1,10 @@
+/* styles/globals.css یا کسی بھی گلوبل CSS فائل میں شامل کریں */
+@media (max-width: 600px) {
+  .hide-on-small {
+    display: none;
+  }
+}
+
 .root {
   overflow: hidden;
 }

@@ -1,23 +1,30 @@
 import React, { FC } from "react";
 import LoginAI from "../../(server-components)/LoginAI";
+// import Image from "next/image";
+// import imagePngBG from "@/images/giammarco-boscaro-zeH-ljawHtg-unsplash 1.png";
+
 export interface ListingRealEstatePageProps {}
 
 const ListingRealEstatePage: FC<ListingRealEstatePageProps> = ({}) => {
-  // useEffect(() => {
-  //   const $body = document.querySelector("body");
-  //   if ($body) {
-  //     $body.className = "theme-cyan-blueGrey";
-  //   }
-  //   return () => {
-  //     if ($body) {
-  //       $body.className = "";
-  //     }
-  //   };
-  // }, []);
+
 
   return (
-            <LoginAI />
-  );
+    
+      <div className="nc-ListingRealEstateMapPage relative min-h-screen">
+        <div className="absolute inset-y-0 w-full flex-grow">
+          {/* <Image fill className="object-cover" src={imagePngBG} alt="hero" /> */}
+    
+          <div className="container pb-24 lg:pb-28 flex items-center justify-center">
+            {/* Responsive adjustments */}
+            <div className="absolute inset-y-0 w-[90%] sm:w-[70%] md:w-[50%] lg:w-[80%] xl:w-[33rem]">
+              <LoginAI className="pt-10 lg:pt-16 lg:pb-16" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+    
+
 };
 
 export default ListingRealEstatePage;
