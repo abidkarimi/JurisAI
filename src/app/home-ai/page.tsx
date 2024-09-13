@@ -625,29 +625,19 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   //   );
   // };
   const renderChatWithJurisAI = () => {
-  handleButtonClick();
-  return (
-    <div
-      className="divide-y divide-neutral-100 dark:divide-neutral-800"
-      style={{
-        overflow: "auto",
-        display: "flex",
-        flexDirection: "column-reverse", // الٹا رینڈر کرنے کے لئے
-      }}
-    >
-      {
-        responseFromJuris
-          .slice()
-          .reverse() // اصل array کو متاثر کیے بغیر ایک copy بناتا ہے
-          .map(
+    handleButtonClick()
+    return (
+      <div className="divide-y divide-neutral-100 dark:divide-neutral-800 " style={{overflow: "auto"}}>
+        {
+          responseFromJuris.map(
             (val, ind) => 
-              <ChatWithJurisAI key={ind} query={val.query} response={val.response} className="py-8" loading={loading ? true : false} />
+              <ChatWithJurisAI key={ind} query={val.query} response = {val.response} className="py-8" loading = {loading?true:false}/>
+            
           )
-      }
-    </div>
-  );
-};
-
+        }
+      </div>
+    );
+  };
 
   
   const handleButtonClick = async () => {
