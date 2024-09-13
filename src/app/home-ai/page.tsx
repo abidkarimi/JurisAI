@@ -738,7 +738,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            alignItems: "center",
+            alignItems: "left",
           }}
         >
           {enter ? renderChatWithJurisAI() : renderInitialScreen()}
