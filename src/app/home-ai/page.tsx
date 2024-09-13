@@ -32,6 +32,8 @@ import toast from "react-hot-toast";
 import jwt from "jsonwebtoken";
 import Cookies from "js-cookie";
 import { url } from "inspector";
+import "@/styles/__theme_custom.scss";
+import exp from "constants";
 
 export interface AuthorPageProps {
   className?: string;
@@ -123,6 +125,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       setIsOpen(true);
     }
     return (
+      <div className={`nc-SocialsList1 ${className} hide-on-small`} data-nc-id="SocialsList1">
       <div className=" w-full flex flex-col space-y-6 sm:space-y-3 px-0 sm:pl-0 xl:pl-0 h-screen">
         {/* <Avatar
           hasChecked
@@ -389,10 +392,10 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           </div>
         </div> */}
       </div>
+      </div>
     );
   };
   const [message, setMessage] = useState("");
-
   const handleMessageChange = (e:any) => {
     console.log("changing ", e.target.value)
     setMessage(e.target.value);
@@ -439,6 +442,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       </div>
     );
   };
+ 
   const renderInitialScreen = () => {
 
 
@@ -604,25 +608,32 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   // console.log("query", query);
 
+  // const renderChatWithJurisAI = () => {
+  //   handleButtonClick();
+  //   return (
+  //     <div className="divide-y divide-neutral-100 dark:divide-neutral-800" style={{ overflow: "auto" }}>
+  //       {
+  //         responseFromJuris
+  //           .slice() // یہ اصل array کو متاثر کیے بغیر ایک copy بناتا ہے
+  //           .reverse() // array کو الٹا کر دیتا ہے
+  //           .map(
+  //             (val, ind) => 
+  //               <ChatWithJurisAI key={ind} query={val.query} response={val.response} className="py-8" loading={loading ? true : false} />
+  //           )
+  //       }
+  //     </div>
+  //   );
+  // };
   const renderChatWithJurisAI = () => {
-    handleButtonClick();
+    handleButtonClick()
     return (
-      <div
-        className="divide-y divide-neutral-100 dark:divide-neutral-800"
-        style={{
-          overflow: "auto",
-          display: "flex",
-          flexDirection: "column-reverse", // الٹا رینڈر کرنے کے لئے
-        }}
-      >
+      <div className="divide-y divide-neutral-100 dark:divide-neutral-800 " style={{overflow: "auto"}}>
         {
-          responseFromJuris
-            .slice() // اصل array کو متاثر کیے بغیر ایک copy بناتا ہے
-            .reverse()
-            .map(
-              (val, ind) => 
-                <ChatWithJurisAI key={ind} query={val.query} response={val.response} className="py-8" loading={loading ? true : false} />
-            )
+          responseFromJuris.map(
+            (val, ind) => 
+              <ChatWithJurisAI key={ind} query={val.query} response = {val.response} className="py-8" loading = {loading?true:false}/>
+            
+          )
         }
       </div>
     );
@@ -707,17 +718,18 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     // }
   }
   return (
-    <div className={`nc-AuthorPage `}>
+    <div className="nc-AuthorPage">
       <main
-        className="mt-0 mb-0 lg:mb-0 flex flex-col lg:flex-row "
+        className="mt-0 mb-0 flex flex-col lg:flex-row"
         style={{ height: "100vh" }}
       >
         <div
-          className="block flex-grow mb-0 lg:mb-0"
+          className="flex-grow mb-0 lg:mb-0"
           style={{ backgroundColor: "#202123" }}
         >
           <div className="lg:sticky lg:top-0">{Rendersidebar()}</div>
         </div>
+  
         <div
           className="w-full lg:w-3/5 xl:w-4/5 space-y-8 lg:space-y-10 lg:pl-0 flex-shrink-0 dark:bg-[#343540]"
           style={{
@@ -729,25 +741,11 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             alignItems: "center",
           }}
         >
-          {/* {renderSection1()} */}
-          {/* {renderSection2()} */}
-
           {enter ? renderChatWithJurisAI() : renderInitialScreen()}
-          <div className="container pt-20 pb-0" style={{ padding: "0" }}>
-            {/* > */}
-            {/* {renderChatWithJurisAI()}
-            {renderChatWithJurisAI()} */}
-
-            {/* {renderQueryField()} */}
-            <div className="space-y-5" style={{ position: "sticky" }}>
+          <div className="container pt-4 pb-0 px-0 lg:px-4">
+            <div className="space-y-5">
               <div
-                className="relative"
-                style={{
-                  position: "sticky",
-                  width: "90%",
-                  margin: "auto",
-                  left: "1rem",
-                }}
+                className="relative w-full lg:w-3/4 mx-auto"
               >
                 <form onSubmit={handleFormSubmit}>
                   <Input
@@ -756,17 +754,15 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
                     onChange={onInputChange}
                     onKeyDown={onInputEnter}
                     placeholder="Message JurisAI ..."
-                    className="h-16 px-4 py-3 rounded-2xl"
-
-
+                    className="h-14 px-4 py-3 rounded-2xl w-full"
                   />
                   <button
                     onClick={onSendButtonClick}
                     type="submit"
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 "
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2"
                   >
                     <IoMdSend
-                      size={32}
+                      size={28}
                       style={{
                         color: "rgba(142, 142, 160, 1)",
                       }}
