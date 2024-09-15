@@ -28,7 +28,7 @@ interface NavItem {
 const NAV: NavItem[] = [
   { name: "Clear conversations", icon: FaTrash, link: "#" },
   { name: "Dark mode", icon: FaMoon, link: "#" },
-  { name: "Premium plan", icon: FaSync, link: "#" },
+  { name: "Premium plan1", icon: FaSync, link: "#" },
   { name: "Updates & FAQ", icon: FaQuestionCircle, link: "#" },
   { name: "Logout", icon: FaSignOutAlt, link: "/" },
 ];
