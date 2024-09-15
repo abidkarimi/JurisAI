@@ -1,12 +1,12 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Avatar from "@/shared/Avatar";
 import { BiLike } from "react-icons/bi";
 import { BiDislike } from "react-icons/bi";
 import chatUurIsAiLogo from "@/images/avatars/chat-juris-ai-logo.png";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Button, { ButtonProps } from "@/shared/Button";
-import Spinner from '@/shared/spinner'
-
+import Spinner from '@/shared/spinner';
+import { marked } from 'marked'
 interface CommentListingDataType {
   name?: string;
   avatar?: string;
@@ -48,6 +48,41 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
   loading
 
 }) => {
+  {
+    // console.log("cahta", value)
+     (
+      <>
+          <div className="book-summary">
+           
+            <style jsx>{`
+              #content {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 20px;
+              }
+      
+              ol {
+                padding-left: 20px;
+                list-style-position: inside;
+              }
+      
+              ul {
+                padding-left: 20px;
+                list-style-type: disc;
+              }
+      
+              p {
+                margin-bottom: 10px;
+              }
+      
+              strong {
+                font-weight: bold;
+              }
+            `}</style>
+      </div>
+      </>
+    );
+  };
 
   // console.log("cahta", value)
   return (
@@ -74,22 +109,6 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
         <div className="flex-grow">
           <div className="flex justify-between space-x-3">
             <div className="flex flex-col">
-              {/* No need of name so commenting */}
-              {/* <div className="text-sm font-semibold">
-              <span>{data.name}</span>
-              {hasListingTitle && (
-                <>
-                  <span className="text-neutral-500 dark:text-neutral-400 font-normal">
-                    {` review in `}
-                  </span>
-                  <a href="/">The Lounge & Bar</a>
-                </>
-              )}
-            </div> */}
-              {/* Commenting date as date is not required in app as per design */}
-              {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-              {data.date}
-            </span> */}
               {query}
             </div>
             <div className="flex"
@@ -144,23 +163,8 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
         <div className="flex-grow">
           <div className="flex justify-between space-x-3">
             <div className="flex flex-col">
-            {response == 'loading'? <Spinner loading  = {loading?true:false}/> :response}
-              {/* No need of name so commenting */}
-              {/* <div className="text-sm font-semibold">
-              <span>{data.name}</span>
-              {hasListingTitle && (
-                <>
-                  <span className="text-neutral-500 dark:text-neutral-400 font-normal">
-                    {` review in `}
-                  </span>
-                  <a href="/">The Lounge & Bar</a>
-                </>
-              )}
-            </div> */}
-              {/* Commenting date as date is not required in app as per design */}
-              {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-              {data.date}
-            </span> */}
+            {response == 'loading'? <Spinner loading  = {loading?true:false}/> :     <div dangerouslySetInnerHTML={{ __html: response }} /> }
+
             </div>
             <div className="flex"
               style={
@@ -188,68 +192,6 @@ const ChatWithJurisAI: FC<CommentListingProps> = ({
         </div>
       </div>
 
-      <div
-        className={`nc-CommentListing flex space-x-4 ${className}`}
-        data-nc-id="CommentListing"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "space-between",
-        }}
-      >
-        {/* This image of either Querier or Response from JurisAI */}
-        <div className="pt-0.5">
-          <Avatar
-            sizeClass="h-10 w-10 text-lg"
-            radius="rounded-full"
-            userName={data.name}
-            imgUrl={data.avatar}
-          />
-        </div>
-        <div className="flex-grow">
-          <div className="flex justify-between space-x-3">
-            <div className="flex flex-col">
-              {/* No need of name so commenting */}
-              {/* <div className="text-sm font-semibold">
-              <span>{data.name}</span>
-              {hasListingTitle && (
-                <>
-                  <span className="text-neutral-500 dark:text-neutral-400 font-normal">
-                    {` review in `}
-                  </span>
-                  <a href="/">The Lounge & Bar</a>
-                </>
-              )}
-            </div> */}
-              {/* Commenting date as date is not required in app as per design */}
-              {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-              {data.date}
-            </span> */}
-              {query}
-            </div>
-            <div className="flex"
-              style={
-                {
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-                }
-              }
-            >
-              <BiLike className="w-4 h-4" style={{ cursor: 'pointer' }} />
-              <BiDislike className="w-4 h-4" style={{ cursor: 'pointer' }} />
-            </div>
-          </div>
-          <span className="block mt-3 text-neutral-6000 dark:text-neutral-300"
-            style={{
-              width: '910px',
-              height: 'auto',
-            }}
-          >
-          
-          </span>
-        </div>
-      </div>
 
 
 

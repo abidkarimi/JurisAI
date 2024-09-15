@@ -13,7 +13,7 @@ import { IoSyncSharp } from "react-icons/io5";
 //   DEMO_EXPERIENCES_LISTINGS,
 //   DEMO_STAY_LISTINGS,
 // } from "@/data/listings";
-import React, { FC, Fragment, useState, useEffect } from "react";
+import React, { FC, Fragment, useState, useEffect, useRef  } from "react";
 import Avatar from "@/shared/Avatar";
 import ButtonSecondary from "@/shared/ButtonSecondary";
 import SocialsList from "@/shared/SocialsList";
@@ -34,6 +34,9 @@ import Cookies from "js-cookie";
 import { url } from "inspector";
 import "@/styles/__theme_custom.scss";
 import exp from "constants";
+import { marked } from 'marked'
+import ResponseCache from "next/dist/server/response-cache";
+
 
 export interface AuthorPageProps {
   className?: string;
@@ -83,6 +86,9 @@ interface queryResponse {
 
 const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
+  const scrollRef = useRef(null); // Step 1: Create a ref for the div
+  const [responseFromJuris, setResponseFromJuris] = useState<queryResponse[]>([]);  // state to stored response from model
+  const [query, setQuery] = useState(""); // State 
 
   useEffect(() => {
     const tokk = localStorage.getItem("token");
@@ -91,7 +97,13 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     setDecodedToken(decoded);
     console.log(decoded);
   }, []);
-
+  useEffect(() => {
+    console.log("IS state changed??? ", responseFromJuris)
+    console.log("Scroller ", scrollRef, scrollRef.current)
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [responseFromJuris]);
   // Use decodedToken state in your component as needed
   const userId = decodedToken?.id;
   const email = decodedToken?.email;
@@ -127,30 +139,6 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     return (
       <div className={`nc-SocialsList1 ${className} hide-on-small`} data-nc-id="SocialsList1">
       <div className=" w-full flex flex-col space-y-6 sm:space-y-3 px-0 sm:pl-0 xl:pl-0 h-screen">
-        {/* <Avatar
-          hasChecked
-          hasCheckedClass="w-6 h-6 -top-0.5 right-2"
-          sizeClass="w-28 h-28"
-        /> */}
-
-        {/* ---- */}
-        {/* <div className="space-y-3 text-center flex flex-col items-center">
-          <h2 className="text-3xl font-semibold">Kevin Francis</h2>
-          <StartRating className="!text-base" />
-        </div> */}
-
-        {/* ---- */}
-        {/* <p className="text-neutral-500 dark:text-neutral-400">
-          Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
-          accommodation, an outdoor.
-        </p> */}
-
-        {/* ---- */}
-        {/* <SocialsList
-          className="!space-x-3"
-          itemClass="flex items-center justify-center w-9 h-9 rounded-full bg-neutral-100 dark:bg-neutral-800 text-xl"
-        /> */}
-
         <div className="space-y-0">
           <div className="flex items-center ">
             <span
@@ -175,19 +163,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           className=" border-b border-neutral-200 dark:border-neutral-700 "
           style={{ borderColor: "#4d4d4f" }}
         ></div>
-        {/* <div className="p-20"></div>
-        <div className="p-10"></div>
-        <div className="p-10"></div> */}
         <div className="h-3/4"></div>
-
-        {/* <div
-          className="border-b border-neutral-200 dark:border-neutral-700 w-50"
-          style={{ borderColor: "#4d4d4f" }}
-        ></div>
-        <div
-          className="border-b border-neutral-200 dark:border-neutral-700 w-50"
-          style={{ borderColor: "#4d4d4f" }}
-        ></div> */}
         <div
           className="border-b border-neutral-200 dark:border-neutral-700 w-50"
           style={{ borderColor: "#4d4d4f" }}
@@ -287,110 +263,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             </Dialog>
           </Transition>
         </div>
-        {/* <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
-          <div className="col-span-2 flex items-center md:col-span-3">
-            <LeftPanelFooter onLogout={handleLogout} />
-          </div>
-        </div> */}
-        {/* ---- */}
-        {/* <div className="space-y-2 ">
-          <div className="flex items-center space-x-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-neutral-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
-            </svg>
-            <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400" style={{ color: '#ffffff' }}>
-              Ha Noi, Viet Nam
-            </span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-neutral-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-              />
-            </svg>
-            <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400" style={{ color: '#ffffff' }}>
-              Speaking English
-            </span>
-          </div>
 
-          <div className="flex items-center space-x-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-neutral-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400" style={{ color: '#ffffff' }}>
-              Joined in March 2016
-            </span>
-          </div>
-          <div className="flex items-center space-x-4 ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-neutral-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400" style={{ color: '#ffffff' }}>
-              Joined in March 2016
-            </span>
-          </div>
-          <div className="flex items-center space-x-4 pb-9">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-neutral-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            <span className="block text-base sm:text-sm text-neutral-500 dark:text-neutral-400" style={{ color: '#ffffff' }}>
-              Joined in March 2016
-            </span>
-          </div>
-        </div> */}
       </div>
       </div>
     );
@@ -399,48 +272,6 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const handleMessageChange = (e:any) => {
     console.log("changing ", e.target.value)
     setMessage(e.target.value);
-  };
-
-  const renderQueryField = () => {
-    return (
-      <div className="space-y-5" style={{ position: "sticky" }}>
-        <div
-          className="relative"
-          style={{
-            position: "sticky",
-            width: "90%",
-            margin: "auto",
-            left: "1rem",
-          }}
-        >
-          <form onSubmit={handleFormSubmit}>
-            <Input
-              type="text"
-              value={query}
-              onChange={onInputChange}
-              onKeyDown={onInputEnter}
-              placeholder="Message JurisAI ..."
-              className="h-16 px-4 py-3 rounded-2xl"
-
-
-            />
-            <button
-              onClick={onSendButtonClick}
-              type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 "
-            >
-              <IoMdSend
-                size={32}
-                style={{
-                  color: "rgba(142, 142, 160, 1)",
-                }}
-              />
-            </button>
-
-          </form>
-        </div>
-      </div>
-    );
   };
  
   const renderInitialScreen = () => {
@@ -495,110 +326,8 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       </div>
     );
   };
-  // const renderSection1 = () => {
-  //   return (
-  //     <div className="listingSection__wrap rounded-none">
-  //       <div>
-  //         <h2 className="text-2xl font-semibold">{`Kevin Francis's listings`}</h2>
-  //         <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-  //           {`Kevin Francis's listings is very rich, 5 star reviews help him to be
-  //           more branded.`}
-  //         </span>
-  //       </div>
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-
-  //       <div>
-  //         <Tab.Group>
-  //           <Tab.List className="flex space-x-1 overflow-x-auto">
-  //             {categories.map((item) => (
-  //               <Tab key={item} as={Fragment}>
-  //                 {({ selected }) => (
-  //                   <button
-  //                     className={`flex-shrink-0 block !leading-none font-medium px-5 py-2.5 text-sm sm:text-base sm:px-6 sm:py-3 capitalize rounded-full focus:outline-none ${
-  //                       selected
-  //                         ? "bg-secondary-900 text-secondary-50 "
-  //                         : "text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-100 hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-  //                     } `}
-  //                   >
-  //                     {item}
-  //                   </button>
-  //                 )}
-  //               </Tab>
-  //             ))}
-  //           </Tab.List>
-  //           <Tab.Panels>
-  //             <Tab.Panel className="">
-  //               <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
-  //                 {DEMO_STAY_LISTINGS.filter((_, i) => i < 4).map((stay) => (
-  //                   <StayCard key={stay.id} data={stay} />
-  //                 ))}
-  //               </div>
-  //               <div className="flex mt-11 justify-center items-center">
-  //                 <ButtonSecondary>Show me more</ButtonSecondary>
-  //               </div>
-  //             </Tab.Panel>
-  //             <Tab.Panel className="">
-  //               <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
-  //                 {DEMO_EXPERIENCES_LISTINGS.filter((_, i) => i < 4).map(
-  //                   (stay) => (
-  //                     <ExperiencesCard key={stay.id} data={stay} />
-  //                   )
-  //                 )}
-  //               </div>
-  //               <div className="flex mt-11 justify-center items-center">
-  //                 <ButtonSecondary>Show me more</ButtonSecondary>
-  //               </div>
-  //             </Tab.Panel>
-  //             <Tab.Panel className="">
-  //               <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
-  //                 {DEMO_CAR_LISTINGS.filter((_, i) => i < 4).map((stay) => (
-  //                   <CarCard key={stay.id} data={stay} />
-  //                 ))}
-  //               </div>
-  //               <div className="flex mt-11 justify-center items-center">
-  //                 <ButtonSecondary>Show me more</ButtonSecondary>
-  //               </div>
-  //             </Tab.Panel>
-  //           </Tab.Panels>
-  //         </Tab.Group>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
-  // const renderSection2 = () => {
-  //   return (
-  //     <div className="listingSection__wrap">
-  //       {/* HEADING */}
-  //       <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-
-  //       {/* comment */}
-  //       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-  //         <CommentListing hasListingTitle className="pb-8" />
-  //         <CommentListing hasListingTitle className="py-8" />
-  //         <CommentListing hasListingTitle className="py-8" />
-  //         <CommentListing hasListingTitle className="py-8" />
-  //         <div className="pt-8">
-  //           <ButtonSecondary>View more 20 reviews</ButtonSecondary>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
 
 
-  // const [responseFromJuris, setResponseFromJuris] = useState();  // state to stored response from model
-  // const urlForResponse = '/api/users/login';
-  // useEffect(() => {
-  //   axios.get(urlForResponse).then((response) => {
-  //     console.log(` check for response${response.data}`)
-  //   })
-  // });
-
-
-  const [query, setQuery] = useState(""); // State to store the input value
-  const [responseFromJuris, setResponseFromJuris] = useState<queryResponse[]>([]);  // state to stored response from model
 
   const onInputChange = (event:any) => {
     setQuery(event.target.value);
@@ -608,65 +337,47 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   // console.log("query", query);
 
-  // const renderChatWithJurisAI = () => {
-  //   handleButtonClick();
-  //   return (
-  //     <div className="divide-y divide-neutral-100 dark:divide-neutral-800" style={{ overflow: "auto" }}>
-  //       {
-  //         responseFromJuris
-  //           .slice() // یہ اصل array کو متاثر کیے بغیر ایک copy بناتا ہے
-  //           .reverse() // array کو الٹا کر دیتا ہے
-  //           .map(
-  //             (val, ind) => 
-  //               <ChatWithJurisAI key={ind} query={val.query} response={val.response} className="py-8" loading={loading ? true : false} />
-  //           )
-  //       }
-  //     </div>
-  //   );
-  // };
   const renderChatWithJurisAI = () => {
-    handleButtonClick()
     return (
-      <div className="divide-y divide-neutral-100 dark:divide-neutral-800 " style={{overflow: "auto"}}>
+      <div className="divide-y divide-neutral-100 dark:divide-neutral-800"
+      ref={scrollRef}
+       style={{ overflow: "auto",  maxHeight: "550px" }}
+      >
         {
-          responseFromJuris.map(
-            (val, ind) => 
-              <ChatWithJurisAI key={ind} query={val.query} response = {val.response} className="py-8" loading = {loading?true:false}/>
+          responseFromJuris
+            .slice() // یہ اصل array کو متاثر کیے بغیر ایک copy بناتا ہے
+            // .reverse() // array کو الٹا کر دیتا ہے
+            .map(
+              (val, ind) => {
+                console.log(`Inside state mapping Index: ${ind}, Value:`, val.response, val.query, "Loadding ", loading); // Log the index and value on each iteration
+
+               return (<ChatWithJurisAI key={ind} query={val.query} response={val.response} className="py-8" loading={loading ? true : false} />)
+
+              }
             
-          )
-        }
+            )}
       </div>
     );
   };
 
-  
-  const handleButtonClick = async () => {
-    // console.log("Message: How much money did VCs put juris1", message);
-    // const response = await axios.get('/api/places', {
-    //   params: { input: message },
-    // });
-    // console.log("Responsea:", response.data);
-    // Do something with the message value here
-  };
-
   const [enter, setEnter] = useState(false);
 
-  const onSendButtonClick = () => {
+  const onSendButtonClick =  () => {
     setEnter(true); // Triggered when the button is clicked
   };
   const onInputEnter = async (event:any) => {
-    console.log("OnInputEnter fn 12", event.target.value, event.key)
     if (event.key === "Enter") {
-      console.log("Message: How much money did VCs put juris",  event.target.value );
-      let response:any = ""
-      try {      
+      console.log("What is inside reponse sstate at enter hit changed ",  responseFromJuris );
+      let response:any = ''
+      let processResponse:any = ''
+        try {      
         setLoading(true);
-        setResponseFromJuris([...responseFromJuris, {query:query, response:'loading'}])
-
-      response = await axios.get('/api/places', {
-                                    params: { input: event.target.value },
-                                  });
-      console.log("Response recienved from RAG ", response.data.generate_answer)
+        await setResponseFromJuris([...responseFromJuris, {query:query, response:'loading'}])
+        console.log("What is inside reponse sstate at enter hit TRY",  responseFromJuris );
+        const response = await axios.post("/api/users/logins");
+        console.log("Response from RAG ", response)
+          console.log("Serverleass ", response.data, response.data.flaskData, response.data.flaskData.choices[0].message.content)
+      processResponse = await marked(response.data.flaskData.choices[0].message.content);
       } catch (error: any) {
         console.log("invalid credentials");
         toast.error(error.message);
@@ -674,17 +385,9 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       finally {
         setLoading(false);
       }
-
-      // console.log("Revent.target.value", event.target.value)
-      // console.log("responseFromJuris", responseFromJuris , " query query ", query);
-      // responseFromJuris.map(ob => console.log("Question and answers", ob.query, " Re ", ob.response))
       setEnter(true);
-      setResponseFromJuris([...responseFromJuris, {query:query, response:response.data.generate_answer}])
-      // const urlForResponse = '/api/users/login';
-      // const response = await axios.post(urlForResponse, {});
-      // const { token } = response.data; // Extract token from response
-
-      // console.log("Login success");
+     await  setResponseFromJuris([...responseFromJuris, {query:query, response:processResponse}])
+      console.log("AT the end enter hit function what is now value in response state?",  responseFromJuris );
 
     } else {
       // console.log("Else")
@@ -692,7 +395,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     }
   };
   const handleFormSubmit = (e:any) => {
-    console.log("Hellow 1")
+    console.log("handleFormSubmit 1", e.key)
     e.preventDefault();
     if (query.trim() !== '') {
       // prompt("promptong",query);
@@ -703,20 +406,6 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     }
   };
 
-  const API = async (query: any) => {
-    // const value = query.target.value;
-    console.log("Handle Searchaa API", query)
-
-    // try {
-      const response = await axios.get('/api/places', {
-        params: { input: query },
-      });
-      console.log("Responsea:", response.data);
-      // Handle response data here
-    // } catch (error) {
-    //   console.error(error);
-    // }
-  }
   return (
     <div className="nc-AuthorPage">
       <main
